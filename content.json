@@ -1,0 +1,133 @@
+{
+  "hero": {
+    "badge": "Cố Vấn BĐS Cao Cấp",
+    "title_line1": "Người Đồng Hành",
+    "title_line2": "BĐS Đáng Tin Cậy",
+    "name": "Vũ Trọng Khải",
+    "tagline": "\"Không chỉ bán bất động sản — tôi kiến tạo quyết định đúng đắn.\"",
+    "description": "Chuyên gia tư vấn BĐS cao cấp & hạng sang tại TP.HCM, Nha Trang & Vũng Tàu. Từ biệt thự hạng sang đến căn hộ cao cấp — tôi đồng hành từ bước đầu đến khi ký hợp đồng.",
+    "stat1_num": "5+",
+    "stat1_label": "Năm kinh nghiệm",
+    "stat2_num": "$2M+",
+    "stat2_label": "Doanh thu dự án",
+    "stat3_num": "150%",
+    "stat3_label": "KPI Vinhomes",
+    "bg_image": "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=1920&q=85"
+  },
+  "about": {
+    "photo": "khai-photo.png",
+    "role_badge": "CMO · Sale & Marketing",
+    "name_caption": "Vũ Trọng Khải",
+    "desc1": "Xin chào, tôi là <strong>Vũ Trọng Khải</strong> – CMO chuyên sâu về Sale & Marketing Bất Động Sản Cao cấp. Xuất phát từ nền tảng kỹ sư xây dựng, qua nhiều năm hoạt động trong lĩnh vực Digital Marketing BĐS, tôi hiểu sản phẩm từ bên trong ra ngoài — từ chất lượng công trình đến tâm lý khách hàng.",
+    "desc2": "Tôi không chỉ kết nối người mua và người bán — tôi là <em style=\"color:var(--gold);font-style:normal;font-weight:600\">người đồng hành chiến lược</em>, giúp khách hàng ra quyết định sáng suốt dựa trên dữ liệu và am hiểu thị trường sâu sắc."
+  },
+  "cred": {
+    "num1": "5+",
+    "label1": "Năm Kinh Nghiệm",
+    "num2": "$2M+",
+    "label2": "Doanh Thu Dự Án",
+    "num3": "150%",
+    "label3": "KPI Vinhomes",
+    "num4": "9+",
+    "label4": "Chủ Đầu Tư Hợp Tác"
+  },
+  "expertise": {
+    "card1_title": "Căn Hộ Cao Cấp",
+    "card1_desc": "Vinhomes Grand Park, The Global City, Eaton Park, OpusK, Metropole Thủ Thiêm, Grand Marina, Empire City, Lumiere Riverside, The Beverly...",
+    "card2_title": "Biệt Thự & Nhà Phố",
+    "card2_desc": "Gladia By The Water, Senturia An Phú, SpringVille, Celadon City — biệt thự liền kề & nhà phố thương mại cao cấp trong các khu đô thị đẳng cấp.",
+    "card3_title": "BĐS Nghỉ Dưỡng",
+    "card3_desc": "Libera Nha Trang, Blanca City, MAIA Hồ Tràm, Vinhomes Cần Giờ, Eco Retreat — vừa nghỉ dưỡng vừa sinh lời bền vững.",
+    "card4_title": "BĐS Thứ Cấp",
+    "card4_desc": "Hỗ trợ ra hàng cho nhà đầu tư — định giá thực, kết nối người mua uy tín, pháp lý sạch, giao dịch minh bạch từ A–Z."
+  },
+  "listings": [
+    {
+      "image": "listing-1.jpg",
+      "name": "Eaton Park",
+      "location": "Thủ Đức – TP.HCM",
+      "scale": "1.200 căn",
+      "type": "Căn hộ hạng sang",
+      "price": "8 – 15 tỷ",
+      "badge": "Căn Hộ Cao Cấp"
+    },
+    {
+      "image": "listing-2.jpg",
+      "name": "Gladia By The Water",
+      "location": "An Phú – Quận 2",
+      "scale": "120 biệt thự",
+      "type": "Biệt thự song lập",
+      "price": "35 – 80 tỷ",
+      "badge": "Biệt Thự"
+    },
+    {
+      "image": "listing-3.jpg",
+      "name": "Libera Nha Trang",
+      "location": "Nha Trang – Khánh Hoà",
+      "scale": "500 căn condotel",
+      "type": "Condotel ven biển",
+      "price": "2.5 – 5 tỷ",
+      "badge": "Nghỉ Dưỡng"
+    },
+    {
+      "image": "",
+      "name": "Dự Án Mới",
+      "location": "",
+      "scale": "",
+      "type": "",
+      "price": "",
+      "badge": ""
+    },
+    {
+      "image": "",
+      "name": "Dự Án Mới",
+      "location": "",
+      "scale": "",
+      "type": "",
+      "price": "",
+      "badge": ""
+    },
+    {
+      "image": "",
+      "name": "Dự Án Mới",
+      "location": "",
+      "scale": "",
+      "type": "",
+      "price": "",
+      "badge": ""
+    }
+  ],
+  "partners": [
+    "Vinhomes",
+    "Masterise Homes",
+    "Gamuda Land",
+    "Khang Điền",
+    "Sơn Kim Land",
+    "Sun Group",
+    "Ecopark",
+    "Keppel Land",
+    "CapitaLand"
+  ],
+  "contact": {
+    "phone": "0902 79 8800",
+    "phone_link": "tel:0902798800",
+    "email": "khaivt.ksxd.166@gmail.com",
+    "facebook_url": "https://www.facebook.com/khai.rainmaker",
+    "facebook_label": "fb.com/khai.rainmaker",
+    "zalo_link": "https://zalo.me/0902798800",
+    "zalo_phone": "0902798800"
+  },
+  "form_settings": {
+    "email_webhook": "https://formspree.io/f/mojklqgq",
+    "notify_email": "khaivt.ksxd.166@gmail.com",
+    "google_sheet_url": "",
+    "sheet_name": "Leads"
+  },
+  "seo": {
+    "title": "Vũ Trọng Khải – Cố Vấn BĐS Cao Cấp Tin Cậy",
+    "description": "Vũ Trọng Khải – Chuyên gia tư vấn Bất Động Sản cao cấp tại TP.HCM, Nha Trang, Vũng Tàu.",
+    "keywords": "bất động sản cao cấp, tư vấn BĐS, Vũ Trọng Khải, Vinhomes, biệt thự, căn hộ hạng sang",
+    "og_image": "",
+    "favicon": ""
+  }
+}

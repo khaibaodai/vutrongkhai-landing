@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin CMS – Vũ Trọng Khải</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --navy:#0B1F3A;--navy2:#162d4a;--gold:#B8922A;--gold2:#D4A840;
+  --bg:#F0F2F5;--white:#fff;--border:#e0e0e0;--text:#1a1a2e;
+  --gray:#666;--lighttext:#aaa;--red:#e53935;--green:#2e7d32;
+  --sidebar:250px;--topbar:58px;
+}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);display:flex;min-height:100vh;font-size:14px}
+
+/* SIDEBAR */
+.sidebar{width:var(--sidebar);background:var(--navy);position:fixed;top:0;left:0;bottom:0;display:flex;flex-direction:column;z-index:100;overflow-y:auto}
+.sidebar-logo{padding:1.2rem 1rem .8rem;border-bottom:1px solid rgba(255,255,255,.08)}
+.sidebar-logo .brand{font-size:.95rem;font-weight:700;color:#fff;letter-spacing:1px}
+.sidebar-logo .dot{color:var(--gold2)}
+.sidebar-logo .sub{font-size:.62rem;color:rgba(255,255,255,.4);margin-top:.15rem}
+.sidebar-nav{flex:1;padding:.8rem 0}
+.nav-group{padding:.5rem .9rem .1rem;font-size:.58rem;color:rgba(255,255,255,.28);letter-spacing:2px;text-transform:uppercase}
+.nav-item{display:flex;align-items:center;gap:.6rem;padding:.55rem .9rem;color:rgba(255,255,255,.6);font-size:.78rem;cursor:pointer;transition:all .15s;border-left:3px solid transparent;text-decoration:none}
+.nav-item:hover{background:rgba(255,255,255,.06);color:#fff}
+.nav-item.active{background:rgba(212,168,64,.13);color:var(--gold2);border-left-color:var(--gold2)}
+.nav-item i{width:15px;font-size:.76rem;text-align:center}
+.sidebar-footer{padding:.9rem 1rem;border-top:1px solid rgba(255,255,255,.08);display:flex;flex-direction:column;gap:.5rem}
+.preview-btn{display:flex;align-items:center;justify-content:center;gap:.4rem;background:var(--gold);color:#fff;padding:.6rem;border-radius:5px;text-decoration:none;font-size:.75rem;font-weight:600;transition:background .2s}
+.preview-btn:hover{background:var(--gold2)}
+.deploy-btn{display:flex;align-items:center;justify-content:center;gap:.4rem;background:#1e4d22;color:#fff;padding:.6rem;border-radius:5px;text-decoration:none;font-size:.75rem;font-weight:600;transition:background .2s;border:none;cursor:pointer;width:100%;font-family:'Inter',sans-serif}
+.deploy-btn:hover{background:#2a6b30}
+.deploy-btn:disabled{background:#333;cursor:not-allowed}
+
+/* MAIN */
+.main{margin-left:var(--sidebar);flex:1;display:flex;flex-direction:column;min-height:100vh}
+.local-banner{background:#1a3a1a;color:#5fdb6a;border-bottom:1px solid #2a5a2a;padding:.5rem 1.5rem;font-size:.72rem;display:flex;align-items:center;gap:.5rem}
+.local-banner.hidden{display:none}
+.local-banner i{color:#5fdb6a}
+.topbar{background:var(--white);border-bottom:1px solid var(--border);padding:.7rem 1.5rem;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:50;height:var(--topbar)}
+.topbar-left h1{font-size:.92rem;font-weight:600}
+.topbar-left .breadcrumb{font-size:.68rem;color:var(--lighttext);margin-top:.08rem}
+.topbar-actions{display:flex;gap:.5rem}
+.save-btn{background:var(--gold);color:#fff;border:none;padding:.5rem 1.2rem;border-radius:5px;font-size:.78rem;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:.35rem;transition:all .2s;font-family:'Inter',sans-serif}
+.save-btn:hover{background:var(--gold2);transform:translateY(-1px);box-shadow:0 3px 10px rgba(184,146,42,.3)}
+.save-btn:disabled{background:#aaa;cursor:not-allowed;transform:none;box-shadow:none}
+
+/* CONTENT */
+.content{flex:1;padding:1.4rem 1.5rem;max-width:1100px}
+
+/* PANELS */
+.panel{background:var(--white);border:1px solid var(--border);border-radius:8px;margin-bottom:1.2rem;overflow:hidden;display:none}
+.panel.active{display:block}
+.panel-hdr{padding:.85rem 1.2rem;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:.6rem;background:#fafafa}
+.panel-hdr i{color:var(--gold);font-size:.82rem}
+.panel-hdr h2{font-size:.85rem;font-weight:600}
+.panel-hdr .desc{font-size:.68rem;color:var(--lighttext);margin-top:.08rem}
+.panel-body{padding:1.2rem}
+
+/* FORM */
+.fg-grid{display:grid;gap:.85rem}
+.fg-grid.cols2{grid-template-columns:1fr 1fr}
+.fg-grid.cols3{grid-template-columns:1fr 1fr 1fr}
+.fg-grid.cols4{grid-template-columns:1fr 1fr 1fr 1fr}
+.fg{display:flex;flex-direction:column;gap:.28rem}
+.fg label{font-size:.64rem;font-weight:600;color:var(--lighttext);letter-spacing:.4px;text-transform:uppercase}
+.fg input,.fg textarea,.fg select{border:1.5px solid var(--border);background:#fafafa;color:var(--text);padding:.55rem .8rem;font-family:'Inter',sans-serif;font-size:.82rem;border-radius:5px;outline:none;transition:border-color .18s;width:100%}
+.fg input:focus,.fg textarea:focus,.fg select:focus{border-color:var(--gold);background:var(--white)}
+.fg textarea{resize:vertical;min-height:75px;line-height:1.55}
+.fg .hint{font-size:.62rem;color:var(--lighttext);margin-top:.15rem}
+.sep{margin:1rem 0;border:none;border-top:1px solid #f0f0f0}
+.section-label{font-size:.65rem;font-weight:700;color:var(--gold);letter-spacing:.8px;text-transform:uppercase;margin-bottom:.6rem;display:flex;align-items:center;gap:.3rem}
+
+/* STAT CARDS */
+.stat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.8rem}
+.stat-card{background:#fafafa;border:1.5px solid var(--border);border-radius:6px;padding:.85rem}
+.stat-card .sc-label{font-size:.62rem;font-weight:700;color:var(--gold);letter-spacing:.8px;text-transform:uppercase;margin-bottom:.5rem;display:block}
+.stat-card input{width:100%;border:1.5px solid var(--border);border-radius:4px;padding:.45rem .65rem;font-size:.82rem;font-family:'Inter',sans-serif;outline:none;transition:border-color .18s;margin-bottom:.4rem;background:#fff}
+.stat-card input:focus{border-color:var(--gold)}
+
+/* IMAGE UPLOAD */
+.img-uploader{border:2px dashed var(--border);border-radius:8px;padding:1.5rem;text-align:center;cursor:pointer;background:#fafafa;transition:all .2s}
+.img-uploader:hover{border-color:var(--gold);background:#fffdf5}
+.img-uploader input{display:none}
+.img-uploader .icon{font-size:1.6rem;color:#ccc;margin-bottom:.5rem}
+.img-uploader .hint-text{font-size:.72rem;color:var(--lighttext)}
+.img-uploader .hint-text strong{color:var(--gold)}
+.img-preview{max-width:100%;max-height:120px;border-radius:5px;margin:.6rem auto 0;display:block;border:2px solid var(--gold)}
+.upload-status{font-size:.7rem;margin-top:.4rem;font-weight:500;text-align:center}
+.ok{color:var(--green)}.err{color:var(--red)}
+
+/* PARTNER LIST */
+.partner-list{display:flex;flex-direction:column;gap:.4rem;margin-bottom:.6rem}
+.partner-row{display:flex;align-items:center;gap:.5rem;background:#fafafa;border:1.5px solid var(--border);border-radius:5px;padding:.42rem .7rem}
+.partner-row input{flex:1;border:none;background:transparent;font-size:.82rem;font-family:'Inter',sans-serif;outline:none}
+.partner-row .del-btn{background:none;border:none;color:#ccc;cursor:pointer;font-size:.8rem;padding:.15rem;transition:color .15s}
+.partner-row .del-btn:hover{color:var(--red)}
+.add-row-btn{background:var(--white);border:1.5px dashed var(--border);border-radius:5px;padding:.45rem;font-size:.76rem;color:var(--lighttext);cursor:pointer;width:100%;display:flex;align-items:center;justify-content:center;gap:.35rem;transition:all .2s;font-family:'Inter',sans-serif}
+.add-row-btn:hover{border-color:var(--gold);color:var(--gold)}
+
+/* LISTINGS MANAGER */
+.listings-table{width:100%;border-collapse:collapse;margin-top:.8rem}
+.listings-table th{background:#f8f8f8;border:1px solid var(--border);padding:.5rem .7rem;font-size:.65rem;font-weight:700;color:var(--lighttext);letter-spacing:.5px;text-transform:uppercase;text-align:left}
+.listings-table td{border:1px solid var(--border);padding:.5rem .7rem;vertical-align:middle}
+.listings-table td input[data-f]{border:1px solid transparent;background:transparent;font-family:'Inter',sans-serif;font-size:.78rem;outline:none;width:100%;padding:.2rem .3rem;border-radius:3px;transition:border-color .15s}
+.listings-table td input[data-f]:focus{border-color:var(--gold);background:#fffdf5}
+.listings-table .del-btn{background:none;border:none;color:#ddd;cursor:pointer;font-size:.8rem;transition:color .15s;padding:.2rem}
+.listings-table .del-btn:hover{color:var(--red)}
+.listings-table tr:hover td{background:#fafafa}
+.add-listing-btn{display:flex;align-items:center;gap:.4rem;background:var(--navy);color:#fff;border:none;padding:.55rem 1rem;border-radius:5px;font-size:.76rem;font-weight:600;cursor:pointer;margin-top:.7rem;font-family:'Inter',sans-serif;transition:background .2s}
+.add-listing-btn:hover{background:var(--gold)}
+.listing-img-cell{display:flex;align-items:center;gap:.4rem;min-width:90px}
+.listing-img-cell .thumb{width:52px;height:40px;object-fit:cover;border-radius:3px;border:1.5px solid var(--border);background:var(--navy2);display:block;flex-shrink:0}
+.listing-img-cell .thumb-placeholder{width:52px;height:40px;background:var(--navy2);border-radius:3px;display:flex;align-items:center;justify-content:center;border:1.5px solid var(--border);flex-shrink:0}
+.listing-img-cell .thumb-placeholder i{color:rgba(255,255,255,.2);font-size:.9rem}
+.img-upload-mini{position:relative;display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;background:var(--gold);color:#fff;border-radius:4px;cursor:pointer;transition:background .2s;flex-shrink:0}
+.img-upload-mini:hover{background:var(--gold2)}
+.img-upload-mini input{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
+.img-upload-mini i{font-size:.7rem;pointer-events:none}
+
+/* FORM SETTINGS */
+.form-settings-info{background:#f0f7ff;border:1px solid #c3d9f5;border-radius:6px;padding:.9rem 1rem;margin-bottom:1rem;font-size:.78rem;color:#2563eb;line-height:1.6}
+.form-settings-info strong{font-weight:700}
+.step-badge{display:inline-block;background:var(--navy);color:#fff;border-radius:50%;width:18px;height:18px;font-size:.6rem;font-weight:700;text-align:center;line-height:18px;margin-right:.3rem;flex-shrink:0}
+.step-row{display:flex;align-items:flex-start;gap:.4rem;margin-bottom:.4rem;font-size:.76rem}
+
+/* TOAST */
+#toast{position:fixed;bottom:1.8rem;right:1.8rem;background:var(--text);color:#fff;padding:.7rem 1.2rem;border-radius:7px;font-size:.78rem;z-index:9999;display:none;align-items:center;gap:.5rem;box-shadow:0 6px 20px rgba(0,0,0,.2);animation:toastIn .25s ease}
+#toast.show{display:flex}
+#toast.green{background:#2e7d32}#toast.red{background:#c62828}
+@keyframes toastIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+
+.tag{display:inline-block;background:var(--navy);color:#fff;font-size:.62rem;padding:.18rem .5rem;border-radius:2px;margin:.15rem .15rem 0 0}
+</style>
+</head>
+<body>
+
+<!-- SIDEBAR -->
+<aside class="sidebar">
+  <div class="sidebar-logo">
+    <div class="brand">VŨ TRỌNG KHẢI<span class="dot">.</span></div>
+    <div class="sub">⚙ Admin CMS Dashboard</div>
+  </div>
+  <nav class="sidebar-nav">
+    <div class="nav-group">Nội Dung</div>
+    <a class="nav-item active" onclick="show('hero')"><i class="fas fa-star"></i> Hero Section</a>
+    <a class="nav-item" onclick="show('about')"><i class="fas fa-user"></i> Về Tôi</a>
+    <a class="nav-item" onclick="show('cred')"><i class="fas fa-trophy"></i> Thành Tích</a>
+    <a class="nav-item" onclick="show('expertise')"><i class="fas fa-city"></i> Chuyên Môn</a>
+    <a class="nav-item" onclick="show('listings')"><i class="fas fa-building"></i> Dự Án Nổi Bật</a>
+    <a class="nav-item" onclick="show('partners')"><i class="fas fa-handshake"></i> Chủ Đầu Tư</a>
+    <a class="nav-item" onclick="show('contact')"><i class="fas fa-phone"></i> Liên Hệ</a>
+    <a class="nav-item" onclick="show('photos')"><i class="fas fa-camera"></i> Ảnh & Hình</a>
+    <div class="nav-group">Cài Đặt</div>
+    <a class="nav-item" onclick="show('seo')"><i class="fas fa-search"></i> SEO & Meta</a>
+    <a class="nav-item" onclick="show('form')"><i class="fas fa-paper-plane"></i> Form & Lead</a>
+  </nav>
+  <div class="sidebar-footer">
+    <a href="/" target="_blank" class="preview-btn"><i class="fas fa-external-link-alt"></i>&nbsp; Xem Landing Page</a>
+    <button class="deploy-btn" id="deployBtn" onclick="deployToNetlify()"><i class="fas fa-rocket"></i>&nbsp; Deploy lên Netlify</button>
+  </div>
+</aside>
+
+<!-- MAIN -->
+<div class="main">
+  <div class="local-banner" id="localBanner">
+    <i class="fas fa-circle" style="font-size:.45rem"></i>
+    <strong>Local CMS</strong> &mdash; Đang chạy tại localhost. Upload ảnh, lưu nội dung rồi bấm <strong>Deploy lên Netlify</strong> để cập nhật website live.
+  </div>
+  <div class="local-banner hidden" id="remoteBanner" style="background:#4a1a1a;color:#f87171;border-color:#7a2a2a">
+    <i class="fas fa-exclamation-triangle"></i>
+    <strong>Chú ý:</strong> Admin CMS phải chạy tại <strong>localhost:8765/admin</strong> mới upload ảnh được. Trang này chỉ dùng để xem.
+  </div>
+  <div class="topbar">
+    <div class="topbar-left">
+      <h1 id="topTitle">Hero Section</h1>
+      <div class="breadcrumb" id="topBread">Chỉnh sửa tiêu đề, tagline và chỉ số</div>
+    </div>
+    <div class="topbar-actions">
+      <button class="save-btn" id="saveBtn" onclick="save()"><i class="fas fa-save"></i> Lưu Thay Đổi</button>
+    </div>
+  </div>
+
+  <div class="content">
+
+    <!-- ═══ HERO ═══ -->
+    <div class="panel active" id="panel-hero">
+      <div class="panel-hdr"><i class="fas fa-star"></i><div><h2>Hero Section</h2><div class="desc">Tiêu đề, tagline, mô tả và 3 chỉ số thống kê</div></div></div>
+      <div class="panel-body">
+        <div class="fg-grid cols2">
+          <div class="fg"><label>Badge</label><input id="h_badge"></div>
+          <div class="fg"><label>Tên (màu vàng)</label><input id="h_name"></div>
+          <div class="fg"><label>Dòng tiêu đề 1</label><input id="h_line1"></div>
+          <div class="fg"><label>Dòng tiêu đề 2</label><input id="h_line2"></div>
+        </div>
+        <hr class="sep">
+        <div class="fg-grid">
+          <div class="fg"><label>Tagline (câu quote)</label><input id="h_tagline"></div>
+          <div class="fg"><label>Mô tả ngắn</label><textarea id="h_desc" rows="2"></textarea></div>
+        </div>
+        <hr class="sep">
+        <div class="section-label"><i class="fas fa-chart-bar"></i> 3 Chỉ Số Hero</div>
+        <div class="stat-grid">
+          <div class="stat-card"><span class="sc-label">Stat 1</span><input id="h_s1n" placeholder="5+"><input id="h_s1l" placeholder="Năm kinh nghiệm"></div>
+          <div class="stat-card"><span class="sc-label">Stat 2</span><input id="h_s2n" placeholder="$2M+"><input id="h_s2l" placeholder="Doanh thu dự án"></div>
+          <div class="stat-card"><span class="sc-label">Stat 3</span><input id="h_s3n" placeholder="150%"><input id="h_s3l" placeholder="KPI Vinhomes"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ ABOUT ═══ -->
+    <div class="panel" id="panel-about">
+      <div class="panel-hdr"><i class="fas fa-user"></i><div><h2>Về Tôi</h2><div class="desc">Giới thiệu bản thân</div></div></div>
+      <div class="panel-body">
+        <div class="fg-grid cols2">
+          <div class="fg"><label>Badge vai trò</label><input id="a_role"></div>
+          <div class="fg"><label>Tên dưới ảnh</label><input id="a_name"></div>
+        </div>
+        <hr class="sep">
+        <div class="fg-grid">
+          <div class="fg"><label>Đoạn 1</label><textarea id="a_desc1" rows="3"></textarea></div>
+          <div class="fg"><label>Đoạn 2</label><textarea id="a_desc2" rows="3"></textarea></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ CRED ═══ -->
+    <div class="panel" id="panel-cred">
+      <div class="panel-hdr"><i class="fas fa-trophy"></i><div><h2>Thành Tích</h2><div class="desc">4 con số nổi bật (credibility strip)</div></div></div>
+      <div class="panel-body">
+        <div class="fg-grid cols4">
+          <div class="stat-card"><span class="sc-label">Số 1</span><input id="c_n1"><input id="c_l1"></div>
+          <div class="stat-card"><span class="sc-label">Số 2</span><input id="c_n2"><input id="c_l2"></div>
+          <div class="stat-card"><span class="sc-label">Số 3</span><input id="c_n3"><input id="c_l3"></div>
+          <div class="stat-card"><span class="sc-label">Số 4</span><input id="c_n4"><input id="c_l4"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ EXPERTISE ═══ -->
+    <div class="panel" id="panel-expertise">
+      <div class="panel-hdr"><i class="fas fa-city"></i><div><h2>Chuyên Môn</h2><div class="desc">4 phân khúc BĐS</div></div></div>
+      <div class="panel-body">
+        <div class="fg-grid cols2">
+          <div style="border:1.5px solid var(--border);border-radius:6px;padding:.8rem">
+            <div class="section-label"><i class="fas fa-city"></i> Phân khúc 1</div>
+            <div class="fg"><label>Tiêu đề</label><input id="e_t1"></div>
+            <div class="fg" style="margin-top:.5rem"><label>Mô tả</label><textarea id="e_d1" rows="3"></textarea></div>
+          </div>
+          <div style="border:1.5px solid var(--border);border-radius:6px;padding:.8rem">
+            <div class="section-label"><i class="fas fa-home"></i> Phân khúc 2</div>
+            <div class="fg"><label>Tiêu đề</label><input id="e_t2"></div>
+            <div class="fg" style="margin-top:.5rem"><label>Mô tả</label><textarea id="e_d2" rows="3"></textarea></div>
+          </div>
+          <div style="border:1.5px solid var(--border);border-radius:6px;padding:.8rem">
+            <div class="section-label"><i class="fas fa-umbrella-beach"></i> Phân khúc 3</div>
+            <div class="fg"><label>Tiêu đề</label><input id="e_t3"></div>
+            <div class="fg" style="margin-top:.5rem"><label>Mô tả</label><textarea id="e_d3" rows="3"></textarea></div>
+          </div>
+          <div style="border:1.5px solid var(--border);border-radius:6px;padding:.8rem">
+            <div class="section-label"><i class="fas fa-exchange-alt"></i> Phân khúc 4</div>
+            <div class="fg"><label>Tiêu đề</label><input id="e_t4"></div>
+            <div class="fg" style="margin-top:.5rem"><label>Mô tả</label><textarea id="e_d4" rows="3"></textarea></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ LISTINGS ═══ -->
+    <div class="panel" id="panel-listings">
+      <div class="panel-hdr"><i class="fas fa-building"></i><div><h2>Dự Án Nổi Bật</h2><div class="desc">Danh mục dự án đang triển khai — có thể thêm / sửa / xoá</div></div></div>
+      <div class="panel-body">
+        <table class="listings-table" id="listingsTable">
+          <thead>
+            <tr>
+              <th style="width:90px">Ảnh</th>
+              <th>Tên Dự Án</th>
+              <th>Vị Trí</th>
+              <th>Quy Mô</th>
+              <th>Loại Hình</th>
+              <th>Giá Từ</th>
+              <th>Badge</th>
+              <th style="width:36px"></th>
+            </tr>
+          </thead>
+          <tbody id="listingsTbody"></tbody>
+        </table>
+        <button class="add-listing-btn" onclick="addListing()"><i class="fas fa-plus"></i> Thêm Dự Án</button>
+      </div>
+    </div>
+
+    <!-- ═══ PARTNERS ═══ -->
+    <div class="panel" id="panel-partners">
+      <div class="panel-hdr"><i class="fas fa-handshake"></i><div><h2>Chủ Đầu Tư</h2><div class="desc">Logo slider đối tác</div></div></div>
+      <div class="panel-body">
+        <div class="partner-list" id="partnerList"></div>
+        <button class="add-row-btn" onclick="addPartner()"><i class="fas fa-plus"></i> Thêm chủ đầu tư</button>
+      </div>
+    </div>
+
+    <!-- ═══ CONTACT ═══ -->
+    <div class="panel" id="panel-contact">
+      <div class="panel-hdr"><i class="fas fa-phone"></i><div><h2>Liên Hệ</h2><div class="desc">Số điện thoại, Zalo, Email, Facebook</div></div></div>
+      <div class="panel-body">
+        <div class="fg-grid cols2">
+          <div class="fg"><label><i class="fas fa-phone" style="color:var(--gold)"></i> Số hiển thị</label><input id="ct_phone"></div>
+          <div class="fg"><label>Link tel:</label><input id="ct_phone_link" placeholder="tel:0902798800"></div>
+          <div class="fg"><label><i class="fas fa-envelope" style="color:var(--gold)"></i> Email</label><input id="ct_email"></div>
+          <div class="fg"><label><i class="fab fa-facebook" style="color:var(--gold)"></i> Facebook URL</label><input id="ct_fb_url"></div>
+          <div class="fg"><label>Facebook Label</label><input id="ct_fb_label"></div>
+          <div class="fg"><label><i class="fas fa-comment-dots" style="color:var(--gold)"></i> Zalo Link</label><input id="ct_zalo"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ PHOTOS ═══ -->
+    <div class="panel" id="panel-photos">
+      <div class="panel-hdr"><i class="fas fa-camera"></i><div><h2>Ảnh & Hình</h2><div class="desc">Upload ảnh cá nhân và ảnh nền hero</div></div></div>
+      <div class="panel-body">
+        <div class="fg-grid cols2">
+          <div>
+            <div class="section-label"><i class="fas fa-user-circle"></i> Ảnh cá nhân (khai-photo.png)</div>
+            <div class="img-uploader" onclick="document.getElementById('photoUpload').click()">
+              <input type="file" id="photoUpload" accept="image/*" onchange="uploadImg(this,'photo','khai-photo.png')">
+              <div class="icon"><i class="fas fa-cloud-upload-alt"></i></div>
+              <div class="hint-text">Click để chọn ảnh<br><strong>PNG, JPG, WebP</strong> — tỉ lệ 3:4</div>
+              <img id="photoPreview" class="img-preview" src="khai-photo.png" onerror="this.style.display='none'" alt="">
+            </div>
+            <div id="photoStatus" class="upload-status"></div>
+          </div>
+          <div>
+            <div class="section-label"><i class="fas fa-image"></i> Ảnh nền Hero (hero-bg.jpg)</div>
+            <div class="img-uploader" onclick="document.getElementById('heroBgUpload').click()">
+              <input type="file" id="heroBgUpload" accept="image/*" onchange="uploadImg(this,'herobg','hero-bg.jpg')">
+              <div class="icon"><i class="fas fa-cloud-upload-alt"></i></div>
+              <div class="hint-text">Ảnh nền toàn màn hình<br><strong>Khuyến nghị 1920×1080</strong></div>
+              <img id="herobgPreview" class="img-preview" style="display:none" alt="">
+            </div>
+            <div id="herobgStatus" class="upload-status"></div>
+          </div>
+        </div>
+        <hr class="sep">
+        <div class="fg"><label>Hoặc dùng URL ảnh nền (Unsplash/CDN)</label>
+          <input id="h_bg_url" placeholder="https://images.unsplash.com/...">
+          <div class="hint">Để trống nếu đã upload file hero-bg.jpg</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ SEO ═══ -->
+    <div class="panel" id="panel-seo">
+      <div class="panel-hdr"><i class="fas fa-search"></i><div><h2>SEO & Meta Tags</h2><div class="desc">Tiêu đề trang, mô tả, từ khoá, ảnh chia sẻ, favicon</div></div></div>
+      <div class="panel-body">
+        <div class="fg-grid">
+          <div class="fg"><label>Tiêu đề trang &lt;title&gt;</label>
+            <input id="seo_title" maxlength="70">
+            <div class="hint">Tối ưu: 50–70 ký tự</div>
+          </div>
+          <div class="fg"><label>Mô tả trang &lt;meta description&gt;</label>
+            <textarea id="seo_desc" rows="2" maxlength="160"></textarea>
+            <div class="hint">Tối ưu: 120–160 ký tự</div>
+          </div>
+          <div class="fg"><label>Từ khoá &lt;meta keywords&gt;</label>
+            <input id="seo_kw" placeholder="bất động sản cao cấp, tư vấn BĐS, Vinhomes...">
+            <div class="hint">Phân cách bằng dấu phẩy</div>
+          </div>
+        </div>
+        <hr class="sep">
+        <div class="fg-grid cols2">
+          <div>
+            <div class="section-label"><i class="fas fa-share-alt"></i> Ảnh chia sẻ mạng xã hội (OG Image)</div>
+            <div class="img-uploader" onclick="document.getElementById('ogUpload').click()">
+              <input type="file" id="ogUpload" accept="image/*" onchange="uploadImg(this,'og','og-image.jpg')">
+              <div class="icon"><i class="fas fa-share-square"></i></div>
+              <div class="hint-text">Hiển thị khi chia sẻ Facebook/Zalo<br><strong>1200×630px</strong></div>
+              <img id="ogPreview" class="img-preview" style="display:none" alt="">
+            </div>
+            <div id="ogStatus" class="upload-status"></div>
+            <div class="fg" style="margin-top:.6rem"><label>Hoặc URL ảnh OG</label><input id="seo_og_url" placeholder="https://..."></div>
+          </div>
+          <div>
+            <div class="section-label"><i class="fas fa-star"></i> Favicon (icon tab trình duyệt)</div>
+            <div class="img-uploader" onclick="document.getElementById('faviconUpload').click()">
+              <input type="file" id="faviconUpload" accept="image/png,image/ico,image/x-icon" onchange="uploadImg(this,'favicon','favicon.png')">
+              <div class="icon"><i class="fas fa-bookmark"></i></div>
+              <div class="hint-text">Icon hiển thị trên tab browser<br><strong>PNG 32×32px hoặc ICO</strong></div>
+              <img id="faviconPreview" class="img-preview" style="display:none;max-height:48px;max-width:48px" alt="">
+            </div>
+            <div id="faviconStatus" class="upload-status"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ FORM SETTINGS ═══ -->
+    <div class="panel" id="panel-form">
+      <div class="panel-hdr"><i class="fas fa-paper-plane"></i><div><h2>Form Lead & Tích Hợp</h2><div class="desc">Gửi lead về email và đồng bộ Google Sheet</div></div></div>
+      <div class="panel-body">
+        <!-- EMAIL -->
+        <div class="section-label"><i class="fas fa-envelope"></i> Nhận Lead Qua Email</div>
+        <div class="form-settings-info">
+          <div class="step-row"><span class="step-badge">1</span> Tạo tài khoản <strong>Formspree.io</strong> (miễn phí, không cần code)</div>
+          <div class="step-row"><span class="step-badge">2</span> Tạo form mới → copy <strong>Form Endpoint URL</strong> (vd: <code>https://formspree.io/f/xyzabc</code>)</div>
+          <div class="step-row"><span class="step-badge">3</span> Dán URL vào ô bên dưới → Lưu → Form tự động gửi email khi có lead mới</div>
+        </div>
+        <div class="fg-grid cols2">
+          <div class="fg"><label>Formspree Endpoint URL</label>
+            <input id="fm_email_webhook" placeholder="https://formspree.io/f/xxxxxxxx">
+            <div class="hint">Để trống = form chỉ hiện thông báo thành công</div>
+          </div>
+          <div class="fg"><label>Email nhận thông báo (backup)</label>
+            <input id="fm_notify_email" placeholder="email@gmail.com">
+            <div class="hint">Email sẽ nhận tất cả leads</div>
+          </div>
+        </div>
+        <hr class="sep">
+        <!-- GOOGLE SHEET -->
+        <div class="section-label"><i class="fab fa-google"></i> Đồng Bộ Google Sheet</div>
+        <div class="form-settings-info">
+          <div class="step-row"><span class="step-badge">1</span> Mở Google Sheet → Extensions → <strong>Apps Script</strong></div>
+          <div class="step-row"><span class="step-badge">2</span> Paste code từ nút bên dưới → Deploy → <strong>Web App URL</strong></div>
+          <div class="step-row"><span class="step-badge">3</span> Dán Web App URL vào ô dưới → Lưu là xong!</div>
+          <div style="margin-top:.5rem">
+            <button onclick="copyAppsScript()" style="background:var(--navy);color:#fff;border:none;padding:.4rem .8rem;border-radius:4px;font-size:.72rem;cursor:pointer;font-family:'Inter',sans-serif"><i class="fas fa-copy"></i> Copy Apps Script Code</button>
+          </div>
+        </div>
+        <div class="fg-grid cols2">
+          <div class="fg"><label>Google Apps Script Web App URL</label>
+            <input id="fm_sheet_url" placeholder="https://script.google.com/macros/s/...">
+            <div class="hint">Paste URL sau khi deploy Apps Script</div>
+          </div>
+          <div class="fg"><label>Tên Sheet (mặc định: Leads)</label>
+            <input id="fm_sheet_name" placeholder="Leads">
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /content -->
+</div><!-- /main -->
+
+<div id="toast"><i class="fas fa-check-circle"></i><span id="toastMsg"></span></div>
+
+<script>
+let content = {};
+
+// ── Nav ──
+const panelMeta = {
+  hero:{title:'Hero Section',bread:'Tiêu đề, tagline và chỉ số'},
+  about:{title:'Về Tôi',bread:'Giới thiệu bản thân'},
+  cred:{title:'Thành Tích',bread:'4 con số ấn tượng'},
+  expertise:{title:'Chuyên Môn',bread:'4 phân khúc BĐS'},
+  listings:{title:'Dự Án Nổi Bật',bread:'Thêm / sửa / xoá dự án'},
+  partners:{title:'Chủ Đầu Tư',bread:'Logo slider đối tác'},
+  contact:{title:'Liên Hệ',bread:'Số điện thoại, Zalo, Email'},
+  photos:{title:'Ảnh & Hình',bread:'Upload ảnh cá nhân và hero'},
+  seo:{title:'SEO & Meta Tags',bread:'Từ khoá, OG image, favicon'},
+  form:{title:'Form & Lead',bread:'Email webhook và Google Sheet'}
+};
+function show(name){
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(a=>a.classList.remove('active'));
+  const el=document.getElementById('panel-'+name);
+  if(el) el.classList.add('active');
+  document.querySelectorAll('.nav-item').forEach(a=>{
+    if(a.getAttribute('onclick')?.includes("'"+name+"'")) a.classList.add('active');
+  });
+  const m=panelMeta[name]||{};
+  document.getElementById('topTitle').textContent=m.title||name;
+  document.getElementById('topBread').textContent=m.bread||'';
+}
+
+// ── Load ──
+async function loadContent(){
+  try{
+    const r=await fetch('/content.json?t='+Date.now());
+    content=await r.json();
+    fill();
+  }catch(e){toast('Không tải được content.json','red');}
+}
+function v(id){const e=document.getElementById(id);return e?e.value.trim():'';}
+function sv(id,val){const e=document.getElementById(id);if(e&&val!==undefined)e.value=val||'';}
+
+function fill(){
+  const h=content.hero||{};
+  sv('h_badge',h.badge);sv('h_name',h.name);
+  sv('h_line1',h.title_line1);sv('h_line2',h.title_line2);
+  sv('h_tagline',h.tagline);sv('h_desc',h.description);
+  sv('h_s1n',h.stat1_num);sv('h_s1l',h.stat1_label);
+  sv('h_s2n',h.stat2_num);sv('h_s2l',h.stat2_label);
+  sv('h_s3n',h.stat3_num);sv('h_s3l',h.stat3_label);
+  sv('h_bg_url',h.bg_image);
+
+  const a=content.about||{};
+  sv('a_role',a.role_badge);sv('a_name',a.name_caption);
+  sv('a_desc1',a.desc1);sv('a_desc2',a.desc2);
+
+  const c=content.cred||{};
+  sv('c_n1',c.num1);sv('c_l1',c.label1);
+  sv('c_n2',c.num2);sv('c_l2',c.label2);
+  sv('c_n3',c.num3);sv('c_l3',c.label3);
+  sv('c_n4',c.num4);sv('c_l4',c.label4);
+
+  const e=content.expertise||{};
+  sv('e_t1',e.card1_title);sv('e_d1',e.card1_desc);
+  sv('e_t2',e.card2_title);sv('e_d2',e.card2_desc);
+  sv('e_t3',e.card3_title);sv('e_d3',e.card3_desc);
+  sv('e_t4',e.card4_title);sv('e_d4',e.card4_desc);
+
+  renderListings(content.listings||[]);
+  renderPartners(content.partners||[]);
+
+  const ct=content.contact||{};
+  sv('ct_phone',ct.phone);sv('ct_phone_link',ct.phone_link);
+  sv('ct_email',ct.email);
+  sv('ct_fb_url',ct.facebook_url);sv('ct_fb_label',ct.facebook_label);
+  sv('ct_zalo',ct.zalo_link);
+
+  const s=content.seo||{};
+  sv('seo_title',s.title);sv('seo_desc',s.description);
+  sv('seo_kw',s.keywords);sv('seo_og_url',s.og_image);
+
+  const fm=content.form_settings||{};
+  sv('fm_email_webhook',fm.email_webhook);
+  sv('fm_notify_email',fm.notify_email);
+  sv('fm_sheet_url',fm.google_sheet_url);
+  sv('fm_sheet_name',fm.sheet_name||'Leads');
+}
+
+// ── Listings ──
+function renderListings(list){
+  const tbody=document.getElementById('listingsTbody');
+  tbody.innerHTML='';
+  (list||[]).forEach((p,i)=>{
+    const tr=document.createElement('tr');
+    const filename=`listing-${i+1}.jpg`;
+    const imgHtml=p.image
+      ?`<img class="thumb" src="${esc(p.image)}?t=${Date.now()}" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" alt=""><div class="thumb-placeholder" style="display:none"><i class="fas fa-image"></i></div>`
+      :`<div class="thumb-placeholder"><i class="fas fa-image"></i></div>`;
+    tr.innerHTML=`
+      <td><div class="listing-img-cell">
+        ${imgHtml}
+        <label class="img-upload-mini" title="Upload ảnh">
+          <input type="file" accept="image/*" onchange="uploadListingImg(this,${i},'${filename}')">
+          <i class="fas fa-camera"></i>
+        </label>
+        <input type="hidden" data-f="image" value="${esc(p.image||'')}">
+      </div></td>
+      <td><input value="${esc(p.name)}" data-f="name" placeholder="Tên dự án"></td>
+      <td><input value="${esc(p.location)}" data-f="location" placeholder="Vị trí"></td>
+      <td><input value="${esc(p.scale)}" data-f="scale" placeholder="500 căn"></td>
+      <td><input value="${esc(p.type)}" data-f="type" placeholder="Căn hộ cao cấp"></td>
+      <td><input value="${esc(p.price)}" data-f="price" placeholder="5 – 10 tỷ"></td>
+      <td><input value="${esc(p.badge)}" data-f="badge" placeholder="Badge"></td>
+      <td><button class="del-btn" onclick="delListing(${i})"><i class="fas fa-trash"></i></button></td>`;
+    tbody.appendChild(tr);
+  });
+}
+function esc(s){return (s||'').replace(/"/g,'&quot;').replace(/</g,'&lt;');}
+function addListing(){
+  const lst=getListings();
+  lst.push({name:'Dự Án Mới',location:'',scale:'',type:'',price:'',badge:'',image:''});
+  renderListings(lst);
+}
+function delListing(i){const lst=getListings();lst.splice(i,1);renderListings(lst);}
+function getListings(){
+  const rows=document.querySelectorAll('#listingsTbody tr');
+  const lst=[];
+  rows.forEach(tr=>{
+    const obj={};
+    tr.querySelectorAll('input[data-f]').forEach(el=>{obj[el.dataset.f]=el.value.trim();});
+    lst.push(obj);
+  });
+  return lst;
+}
+async function uploadListingImg(inp,rowIdx,filename){
+  const file=inp.files[0];if(!file)return;
+  const tr=inp.closest('tr');
+  const imgCell=tr.querySelector('.listing-img-cell');
+  const hiddenInput=tr.querySelector('input[data-f="image"]');
+  // Show preview immediately
+  const reader=new FileReader();
+  reader.onload=e=>{
+    let thumb=imgCell.querySelector('.thumb');
+    const placeholder=imgCell.querySelector('.thumb-placeholder');
+    if(!thumb){thumb=document.createElement('img');thumb.className='thumb';imgCell.prepend(thumb);if(placeholder)placeholder.style.display='none';}
+    thumb.src=e.target.result;thumb.style.display='block';
+  };
+  reader.readAsDataURL(file);
+  // Upload
+  const fd=new FormData();
+  fd.append('file',new File([file],filename,{type:file.type}));
+  try{
+    const r=await fetch('/api/upload-image',{method:'POST',body:fd});
+    const res=await r.json();
+    if(res.ok){hiddenInput.value=res.filename;toast('✅ Upload ảnh thành công! Nhớ bấm Lưu.','green');}
+    else toast('❌ Upload thất bại: '+res.msg,'red');
+  }catch(e){toast('❌ Lỗi kết nối server','red');}
+}
+
+// ── Partners ──
+function renderPartners(list){
+  const c=document.getElementById('partnerList');c.innerHTML='';
+  (list||[]).forEach((p,i)=>{
+    const r=document.createElement('div');r.className='partner-row';
+    r.innerHTML=`<i class="fas fa-grip-vertical" style="color:#ddd;font-size:.7rem"></i>
+      <input value="${esc(p)}" placeholder="Tên chủ đầu tư">
+      <button class="del-btn" onclick="delPartner(${i})"><i class="fas fa-trash"></i></button>`;
+    c.appendChild(r);
+  });
+}
+function addPartner(){renderPartners([...getPartners(),'Chủ Đầu Tư Mới']);}
+function delPartner(i){const lst=getPartners();lst.splice(i,1);renderPartners(lst);}
+function getPartners(){return [...document.querySelectorAll('#partnerList input')].map(e=>e.value.trim()).filter(Boolean);}
+
+// ── Gather ──
+function gather(){
+  return {
+    hero:{
+      badge:v('h_badge'),title_line1:v('h_line1'),title_line2:v('h_line2'),
+      name:v('h_name'),tagline:v('h_tagline'),description:v('h_desc'),
+      stat1_num:v('h_s1n'),stat1_label:v('h_s1l'),
+      stat2_num:v('h_s2n'),stat2_label:v('h_s2l'),
+      stat3_num:v('h_s3n'),stat3_label:v('h_s3l'),
+      bg_image:v('h_bg_url')||(content.hero||{}).bg_image
+    },
+    about:{
+      photo:(content.about||{}).photo||'khai-photo.png',
+      role_badge:v('a_role'),name_caption:v('a_name'),
+      desc1:v('a_desc1'),desc2:v('a_desc2')
+    },
+    cred:{num1:v('c_n1'),label1:v('c_l1'),num2:v('c_n2'),label2:v('c_l2'),
+          num3:v('c_n3'),label3:v('c_l3'),num4:v('c_n4'),label4:v('c_l4')},
+    expertise:{
+      card1_title:v('e_t1'),card1_desc:v('e_d1'),
+      card2_title:v('e_t2'),card2_desc:v('e_d2'),
+      card3_title:v('e_t3'),card3_desc:v('e_d3'),
+      card4_title:v('e_t4'),card4_desc:v('e_d4')
+    },
+    listings:getListings(),
+    partners:getPartners(),
+    contact:{
+      phone:v('ct_phone'),phone_link:v('ct_phone_link'),email:v('ct_email'),
+      facebook_url:v('ct_fb_url'),facebook_label:v('ct_fb_label'),
+      zalo_link:v('ct_zalo'),zalo_phone:v('ct_zalo').replace(/\D/g,'')
+    },
+    form_settings:{
+      email_webhook:v('fm_email_webhook'),
+      notify_email:v('fm_notify_email'),
+      google_sheet_url:v('fm_sheet_url'),
+      sheet_name:v('fm_sheet_name')||'Leads'
+    },
+    seo:{
+      title:v('seo_title'),description:v('seo_desc'),
+      keywords:v('seo_kw'),og_image:v('seo_og_url')||(content.seo||{}).og_image,
+      favicon:(content.seo||{}).favicon
+    }
+  };
+}
+
+// ── Save ──
+async function save(){
+  const btn=document.getElementById('saveBtn');
+  btn.disabled=true;btn.innerHTML='<i class="fas fa-spinner fa-spin"></i> Đang lưu...';
+  try{
+    const r=await fetch('/api/save-content',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(gather())});
+    const res=await r.json();
+    if(res.ok){content=gather();toast('✅ Đã lưu! Reload trang để xem thay đổi.','green');}
+    else toast('❌ '+res.msg,'red');
+  }catch(e){toast('❌ Không kết nối được server','red');}
+  btn.disabled=false;btn.innerHTML='<i class="fas fa-save"></i> Lưu Thay Đổi';
+}
+
+// ── Upload ──
+async function uploadImg(inp,key,filename){
+  const file=inp.files[0];if(!file)return;
+  const prev=document.getElementById(key+'Preview');
+  const stat=document.getElementById(key+'Status');
+  const reader=new FileReader();
+  reader.onload=e=>{prev.src=e.target.result;prev.style.display='block';};
+  reader.readAsDataURL(file);
+  stat.textContent='Đang upload...';stat.className='upload-status';
+  const fd=new FormData();
+  fd.append('file',new File([file],filename,{type:file.type}));
+  try{
+    const r=await fetch('/api/upload-image',{method:'POST',body:fd});
+    const res=await r.json();
+    if(res.ok){stat.textContent='\u2705 '+res.filename;stat.className='upload-status ok';toast('Upload th\u00e0nh c\u00f4ng!','green');}
+    else{stat.textContent='\u274c '+res.msg;stat.className='upload-status err';}
+  }catch(e){
+    stat.textContent='\u274c Ph\u1ea3i ch\u1ea1y server.py local m\u1edbi upload \u0111\u01b0\u1ee3c!';
+    stat.className='upload-status err';
+    toast('\u274c M\u1edf localhost:8765/admin \u0111\u1ec3 upload \u1ea3nh','red');
+  }
+}
+
+// ── Apps Script helper ──
+function copyAppsScript(){
+  const code=`function doPost(e){
+  const ss = SpreadsheetApp.getActiveSpreadsheet();
+  const sheet = ss.getSheetByName('Leads') || ss.insertSheet('Leads');
+  const data = JSON.parse(e.postData.contents);
+  if(sheet.getLastRow()===0){
+    sheet.appendRow(['Thời gian','Họ tên','Số điện thoại','Loại BĐS','Căn hộ','Vị trí','Ngân sách','Ghi chú']);
+  }
+  sheet.appendRow([
+    new Date(), data.name, data.phone, data.interest,
+    data.canhoType||'', data.location||'', data.budget, data.message||''
+  ]);
+  return ContentService.createTextOutput(JSON.stringify({ok:true}))
+    .setMimeType(ContentService.MimeType.JSON);
+}`;
+  navigator.clipboard.writeText(code).then(()=>toast('Đã copy Apps Script code!','green'));
+}
+
+// ── Toast ──
+function toast(msg,type=''){
+  const t=document.getElementById('toast');
+  document.getElementById('toastMsg').textContent=msg;
+  t.className='show '+(type==='green'?'green':type==='red'?'red':'');
+  setTimeout(()=>t.className='',3500);
+}
+
+// ── Deploy to Netlify ──
+async function deployToNetlify(){
+  const btn=document.getElementById('deployBtn');
+  btn.disabled=true;
+  btn.innerHTML='<i class="fas fa-spinner fa-spin"></i>&nbsp; Đang deploy...';
+  toast('🚀 Đang deploy lên Netlify, vui lòng chờ...','');
+  try{
+    const r=await fetch('/api/deploy',{method:'POST',headers:{'Content-Type':'application/json'},body:'{}'});
+    const res=await r.json();
+    if(res.ok){
+      toast('✅ Deploy thành công! Website đã live.','green');
+      setTimeout(()=>window.open('https://vutrongkhai.com','_blank'),800);
+    } else {
+      toast('❌ Deploy lỗi: '+res.msg.slice(-120),'red');
+    }
+  }catch(e){
+    toast('❌ Cần chạy localhost để deploy!','red');
+  }
+  btn.disabled=false;
+  btn.innerHTML='<i class="fas fa-rocket"></i>&nbsp; Deploy lên Netlify';
+}
+
+// ── Local/Remote detection ──
+(function detectEnv(){
+  const isLocal=location.hostname==='localhost'||location.hostname==='127.0.0.1';
+  document.getElementById('localBanner').classList.toggle('hidden',!isLocal);
+  document.getElementById('remoteBanner').classList.toggle('hidden',isLocal);
+  if(!isLocal){
+    const btn=document.getElementById('deployBtn');
+    if(btn){btn.disabled=true;btn.title='Chỉ deploy được khi chạy local';}
+  }
+})();
+
+loadContent();
+</script>
+</body>
+</html>

@@ -1,0 +1,885 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vũ Trọng Khải – Cố Vấn BĐS Cao Cấp Tin Cậy</title>
+<meta name="description" content="Vũ Trọng Khải – Chuyên gia tư vấn Bất Động Sản cao cấp tại TP.HCM, Nha Trang, Vũng Tàu. Chuyên biệt thự, căn hộ hạng sang, BĐS nghỉ dưỡng.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --navy:#0B1F3A;
+  --navy2:#12284A;
+  --gold:#B8922A;
+  --gold2:#D4A840;
+  --gold-light:#F5E9CC;
+  --white:#FFFFFF;
+  --offwhite:#F8F6F2;
+  --lightgray:#F2F2F2;
+  --gray:#888;
+  --darkgray:#444;
+  --text:#222;
+}
+html{scroll-behavior:smooth}
+body{background:var(--white);color:var(--text);font-family:'Inter',sans-serif;overflow-x:hidden}
+h1,h2,h3,h4{font-family:'Cormorant Garamond',serif}
+::-webkit-scrollbar{width:5px}
+::-webkit-scrollbar-track{background:#f0f0f0}
+::-webkit-scrollbar-thumb{background:var(--gold);border-radius:3px}
+
+/* NAVBAR */
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:var(--navy);padding:0 5%;display:flex;align-items:center;justify-content:space-between;height:60px;transition:all .3s}
+nav.scrolled{box-shadow:0 2px 20px rgba(0,0,0,.15)}
+.nav-logo{font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:700;color:var(--white);letter-spacing:2px;text-decoration:none}
+.nav-logo span{color:var(--gold2)}
+.nav-links{display:flex;gap:2rem;list-style:none}
+.nav-links a{color:rgba(255,255,255,.8);text-decoration:none;font-size:.82rem;letter-spacing:.5px;transition:color .2s}
+.nav-links a:hover{color:var(--gold2)}
+.nav-cta{background:var(--gold);color:var(--white);padding:.45rem 1.3rem;font-weight:600;font-size:.8rem;letter-spacing:.5px;text-decoration:none;transition:all .2s;border-radius:2px}
+.nav-cta:hover{background:var(--gold2)}
+.nav-toggle{display:none;flex-direction:column;gap:5px;cursor:pointer}
+.nav-toggle span{width:22px;height:2px;background:var(--white);transition:all .3s}
+
+/* MOBILE MENU */
+.mobile-menu{display:none;position:fixed;inset:0;background:var(--navy);z-index:999;flex-direction:column;align-items:center;justify-content:center;gap:2rem}
+.mobile-menu.open{display:flex}
+.mobile-menu a{color:var(--white);text-decoration:none;font-size:1.2rem;letter-spacing:2px;text-transform:uppercase}
+.mobile-menu a:hover{color:var(--gold2)}
+.mobile-close{position:absolute;top:1.2rem;right:1.5rem;background:none;border:none;color:var(--white);font-size:1.3rem;cursor:pointer}
+
+/* HERO */
+#hero{min-height:100vh;position:relative;display:flex;align-items:center;padding-top:60px;overflow:hidden}
+.hero-bg{position:absolute;inset:0}
+.hero-bg img{width:100%;height:100%;object-fit:cover;display:block}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(100deg,rgba(11,31,58,.92) 0%,rgba(11,31,58,.75) 55%,rgba(11,31,58,.25) 100%)}
+.hero-content{position:relative;z-index:2;padding:4rem 5% 2rem;max-width:680px}
+.hero-badge{display:inline-flex;align-items:center;gap:.4rem;background:var(--gold);color:var(--white);padding:.3rem .9rem;font-size:.7rem;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:1rem}
+.hero-title{font-weight:700;line-height:1.1;color:var(--white);margin-bottom:.7rem}
+.hero-subtitle{display:block;font-size:clamp(1rem,3.2vw,1.9rem);font-weight:600;letter-spacing:-.01em;white-space:nowrap;margin-bottom:.35rem;opacity:.92}
+.hero-title .name{color:var(--gold2);display:block;font-size:clamp(2.2rem,6.5vw,5rem);line-height:1.05;margin-top:.1rem}
+.hero-tagline{font-family:'Cormorant Garamond',serif;font-size:clamp(.95rem,2.3vw,1.2rem);color:rgba(255,255,255,.82);font-style:italic;margin-bottom:.9rem;line-height:1.5}
+.hero-desc{font-size:clamp(.82rem,.95rem,1rem);color:rgba(255,255,255,.72);line-height:1.8;margin-bottom:1.8rem;font-weight:300;max-width:480px}
+.hero-btns{display:flex;gap:.8rem;flex-wrap:wrap}
+.btn-gold{display:inline-flex;align-items:center;gap:.5rem;background:var(--gold);color:var(--white);padding:.75rem 1.6rem;font-weight:600;font-size:.85rem;letter-spacing:.5px;text-decoration:none;transition:all .25s;border-radius:2px}
+.btn-gold:hover{background:var(--gold2);transform:translateY(-2px);box-shadow:0 6px 20px rgba(184,146,42,.4)}
+.btn-outline-white{display:inline-flex;align-items:center;gap:.5rem;border:1.5px solid rgba(255,255,255,.6);color:var(--white);padding:.75rem 1.6rem;font-size:.85rem;letter-spacing:.5px;text-decoration:none;transition:all .25s;border-radius:2px}
+.btn-outline-white:hover{border-color:var(--gold2);color:var(--gold2);transform:translateY(-2px)}
+.hero-stats-bar{position:absolute;bottom:0;left:0;right:0;z-index:2;background:var(--navy);display:flex;border-top:2px solid var(--gold)}
+.stat-block{flex:1;padding:1rem 1rem;text-align:center;border-right:1px solid rgba(255,255,255,.08)}
+.stat-block:last-child{border-right:none}
+.stat-num{font-family:'Cormorant Garamond',serif;font-size:1.8rem;font-weight:700;color:var(--gold2);display:block;line-height:1}
+.stat-label{font-size:.62rem;color:rgba(255,255,255,.6);letter-spacing:.8px;text-transform:uppercase;margin-top:.2rem;display:block}
+
+/* FEATURED LISTINGS */
+#listings{background:var(--offwhite)}
+.listings-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:2.5rem}
+.listing-card{background:var(--white);border:1px solid #eee;border-radius:4px;overflow:hidden;transition:all .3s;position:relative}
+.listing-card:hover{box-shadow:0 10px 35px rgba(0,0,0,.1);transform:translateY(-4px);border-color:var(--gold)}
+.listing-badge{position:absolute;top:.7rem;left:.7rem;background:var(--gold);color:#fff;font-size:.62rem;font-weight:700;letter-spacing:1px;padding:.22rem .65rem;text-transform:uppercase;border-radius:1px;z-index:1}
+.listing-img{height:185px;background:linear-gradient(135deg,var(--navy),var(--navy2));display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative}
+.listing-img img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
+.listing-card:hover .listing-img img{transform:scale(1.06)}
+.listing-img-placeholder{font-size:3rem;color:rgba(255,255,255,.15)}
+.listing-body{padding:1.2rem 1.3rem}
+.listing-name{font-family:'Cormorant Garamond',serif;font-size:1.15rem;font-weight:700;color:var(--navy);margin-bottom:.25rem;line-height:1.2}
+.listing-loc{display:flex;align-items:center;gap:.3rem;font-size:.73rem;color:var(--gold);margin-bottom:.8rem;font-weight:500}
+.listing-meta{display:grid;grid-template-columns:1fr 1fr;gap:.4rem .8rem;margin-bottom:.8rem}
+.listing-meta-item{font-size:.73rem;color:var(--darkgray)}
+.listing-meta-item span{color:var(--gray);font-size:.66rem;display:block;text-transform:uppercase;letter-spacing:.5px;margin-bottom:.1rem}
+.listing-price{background:var(--gold-light);border-left:3px solid var(--gold);padding:.5rem .8rem;display:flex;align-items:center;justify-content:space-between}
+.listing-price .price-num{font-family:'Cormorant Garamond',serif;font-size:1.05rem;font-weight:700;color:var(--gold)}
+.listing-price .price-label{font-size:.65rem;color:var(--gray)}
+.listing-cta{display:block;text-align:center;background:var(--navy);color:#fff;padding:.55rem;font-size:.75rem;font-weight:600;text-decoration:none;transition:background .2s;letter-spacing:.5px}
+.listing-cta:hover{background:var(--gold)}
+
+/* COMMON */
+section{padding:5rem 5%}
+.section-badge{font-size:.7rem;letter-spacing:3px;text-transform:uppercase;color:var(--gold);font-weight:600;display:block;margin-bottom:.6rem}
+.section-title{font-size:clamp(2rem,3.5vw,2.8rem);font-weight:700;color:var(--navy);line-height:1.15;margin-bottom:.8rem}
+.section-title span{color:var(--gold)}
+.gold-line{width:50px;height:3px;background:var(--gold);margin:.8rem 0 1.8rem;display:block}
+.text-center{text-align:center}
+.text-center .gold-line{margin:1rem auto 2rem}
+.section-desc{color:var(--darkgray);line-height:1.8;font-size:.95rem;font-weight:300}
+.fade-up{opacity:0;transform:translateY(25px);transition:all .65s ease}
+.fade-up.visible{opacity:1;transform:translateY(0)}
+
+/* ABOUT */
+#about{background:var(--offwhite)}
+.about-grid{display:grid;grid-template-columns:420px 1fr;gap:4rem;align-items:start;margin-top:3rem}
+.about-img-wrap{position:relative}
+.about-img-inner{position:relative}
+.about-img-inner img{width:100%;display:block;border-radius:2px;filter:contrast(1.05)}
+.about-tag-box{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(to top,var(--navy) 0%,rgba(11,31,58,.8) 60%,transparent 100%);padding:2rem 1.5rem 1.2rem}
+.about-role{display:inline-block;background:var(--gold);color:var(--white);font-size:.65rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:.2rem .7rem;margin-bottom:.4rem}
+.about-name-img{color:var(--white);font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:700}
+.about-accent-box{position:absolute;top:-15px;right:-15px;width:80px;height:80px;border:3px solid var(--gold);z-index:-1}
+.about-info{padding-top:.5rem}
+.about-desc{color:var(--darkgray);line-height:1.9;font-size:.92rem;margin-bottom:1.2rem;font-weight:300}
+.about-highlights{display:grid;grid-template-columns:1fr 1fr;gap:.9rem;margin:1.5rem 0}
+.hi-item{background:var(--white);border-left:3px solid var(--gold);padding:.9rem 1rem;border-radius:0 2px 2px 0;transition:all .25s;box-shadow:0 1px 6px rgba(0,0,0,.05)}
+.hi-item:hover{box-shadow:0 4px 15px rgba(184,146,42,.15);transform:translateX(3px)}
+.hi-item i{color:var(--gold);margin-bottom:.4rem;font-size:.9rem}
+.hi-item h4{font-size:.82rem;font-weight:600;color:var(--navy);margin-bottom:.2rem}
+.hi-item p{font-size:.76rem;color:var(--gray);line-height:1.5}
+.market-chips{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:1rem}
+.chip{background:var(--white);border:1px solid #ddd;color:var(--navy);font-size:.72rem;padding:.28rem .75rem;border-radius:20px;font-weight:500;transition:all .2s}
+.chip:hover{border-color:var(--gold);color:var(--gold)}
+
+/* EXPERTISE */
+#expertise{background:var(--white)}
+.exp-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem;margin-top:3rem}
+.exp-card{background:var(--offwhite);border-top:3px solid transparent;padding:2rem 1.6rem;transition:all .3s;cursor:default}
+.exp-card:hover{border-top-color:var(--gold);background:var(--white);box-shadow:0 8px 30px rgba(0,0,0,.08);transform:translateY(-4px)}
+.exp-icon{width:46px;height:46px;background:var(--gold-light);border:1px solid var(--gold);display:flex;align-items:center;justify-content:center;margin-bottom:1.2rem;border-radius:2px}
+.exp-icon i{color:var(--gold);font-size:1rem}
+.exp-card h3{font-size:1.1rem;font-weight:700;color:var(--navy);margin-bottom:.5rem}
+.exp-card p{color:var(--gray);font-size:.8rem;line-height:1.7}
+.exp-tags{display:flex;flex-wrap:wrap;gap:.3rem;margin-top:.9rem}
+.exp-tag{font-size:.67rem;background:var(--navy);color:var(--white);padding:.18rem .55rem;border-radius:1px;font-weight:500}
+
+/* SERVICES */
+#services{background:var(--navy)}
+.svc-header{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:end;margin-bottom:3rem}
+.svc-header .section-title{color:var(--white)}
+.svc-header .section-title span{color:var(--gold2)}
+.svc-header p{color:rgba(255,255,255,.65);line-height:1.8;font-size:.9rem;font-weight:300}
+.svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(255,255,255,.08)}
+.svc-card{background:var(--navy);padding:2rem 1.8rem;transition:all .35s;position:relative;overflow:hidden}
+.svc-card::before{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:var(--gold);transform:scaleX(0);transition:transform .3s;transform-origin:left}
+.svc-card:hover{background:#0F2545}
+.svc-card:hover::before{transform:scaleX(1)}
+.svc-num{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:700;color:rgba(212,168,64,.25);line-height:1;margin-bottom:.8rem}
+.svc-card h3{font-size:1rem;font-weight:600;color:var(--white);margin-bottom:.5rem}
+.svc-card p{color:rgba(255,255,255,.55);font-size:.8rem;line-height:1.7}
+.svc-icon{color:var(--gold);margin-bottom:.6rem;font-size:.85rem}
+
+/* PROCESS */
+#process{background:var(--offwhite)}
+.process-wrap{margin-top:3rem;display:grid;grid-template-columns:repeat(4,1fr);gap:0;position:relative}
+.process-wrap::before{content:'';position:absolute;top:28px;left:12.5%;right:12.5%;height:2px;background:linear-gradient(to right,var(--gold),var(--gold2),var(--gold));z-index:0}
+.proc-step{text-align:center;padding:0 1.2rem;position:relative;z-index:1}
+.proc-num{width:56px;height:56px;border-radius:50%;background:var(--navy);border:3px solid var(--gold);color:var(--white);font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:700;display:flex;align-items:center;justify-content:center;margin:0 auto 1.4rem;transition:all .3s}
+.proc-step:hover .proc-num{background:var(--gold);border-color:var(--gold)}
+.proc-step h3{font-size:.95rem;font-weight:600;color:var(--navy);margin-bottom:.4rem}
+.proc-step p{font-size:.78rem;color:var(--gray);line-height:1.6}
+
+/* PARTNERS / LOGO SLIDER */
+#projects{background:var(--white)}
+.partners-intro{margin-bottom:3rem}
+.logo-slider-wrap{overflow:hidden;position:relative;margin-top:2.5rem}
+.logo-slider-wrap::before,.logo-slider-wrap::after{content:'';position:absolute;top:0;bottom:0;width:80px;z-index:2}
+.logo-slider-wrap::before{left:0;background:linear-gradient(to right,var(--white),transparent)}
+.logo-slider-wrap::after{right:0;background:linear-gradient(to left,var(--white),transparent)}
+.logo-track{display:flex;gap:2.5rem;animation:slide 30s linear infinite;width:max-content}
+.logo-track:hover{animation-play-state:paused}
+@keyframes slide{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+.logo-item{flex-shrink:0;width:140px;height:70px;display:flex;align-items:center;justify-content:center;background:var(--offwhite);border:1px solid #eee;border-radius:4px;padding:.8rem 1.2rem;transition:all .3s}
+.logo-item:hover{border-color:var(--gold);background:var(--white);box-shadow:0 4px 15px rgba(184,146,42,.1)}
+.logo-item span{font-family:'Cormorant Garamond',serif;font-size:.85rem;font-weight:700;color:var(--navy);text-align:center;line-height:1.3}
+
+/* CREDIBILITY STRIP */
+#cred{background:var(--navy2);padding:2.5rem 5%}
+.cred-inner{display:flex;align-items:center;justify-content:center;gap:4rem;flex-wrap:wrap}
+.cred-item{text-align:center;color:rgba(255,255,255,.85)}
+.cred-num{font-family:'Cormorant Garamond',serif;font-size:2.4rem;font-weight:700;color:var(--gold2);display:block;line-height:1}
+.cred-text{font-size:.7rem;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,.5);margin-top:.2rem;display:block}
+.cred-div{width:1px;height:50px;background:rgba(255,255,255,.1)}
+
+/* CONTACT */
+#contact{background:var(--offwhite)}
+.contact-grid{display:grid;grid-template-columns:1fr 1.2fr;gap:4rem;margin-top:3rem}
+.contact-card{background:var(--white);border:1px solid #eee;padding:1.2rem 1.4rem;display:flex;align-items:center;gap:1rem;margin-bottom:.8rem;transition:all .25s;border-radius:2px}
+.contact-card:hover{border-color:var(--gold);box-shadow:0 4px 15px rgba(184,146,42,.1)}
+.contact-card .icon{width:42px;height:42px;background:var(--gold-light);border:1px solid var(--gold);display:flex;align-items:center;justify-content:center;flex-shrink:0;border-radius:2px}
+.contact-card .icon i{color:var(--gold);font-size:.9rem}
+.contact-card .label{font-size:.68rem;color:var(--gray);letter-spacing:1px;text-transform:uppercase;margin-bottom:.1rem}
+.contact-card a,.contact-card span.val{color:var(--navy);font-size:.88rem;font-weight:500;text-decoration:none;transition:color .2s}
+.contact-card a:hover{color:var(--gold)}
+.contact-form-wrap{background:var(--white);border:1px solid #eee;padding:2rem;border-radius:2px}
+.contact-form-wrap h3{font-size:1.6rem;font-weight:700;color:var(--navy);margin-bottom:1.5rem}
+.contact-form{display:flex;flex-direction:column;gap:.9rem}
+.fg{display:flex;flex-direction:column;gap:.3rem}
+.fg label{font-size:.7rem;color:var(--gray);letter-spacing:1px;text-transform:uppercase;font-weight:500}
+.fg input,.fg select,.fg textarea{border:1px solid #ddd;background:var(--offwhite);color:var(--text);padding:.75rem 1rem;font-family:'Inter',sans-serif;font-size:.88rem;outline:none;transition:border-color .2s;border-radius:2px;-webkit-appearance:none}
+.fg input:focus,.fg select:focus,.fg textarea:focus{border-color:var(--gold)}
+.fg textarea{resize:vertical;min-height:90px}
+.fg select option{background:var(--white)}
+.fg-row{display:grid;grid-template-columns:1fr 1fr;gap:.9rem}
+.btn-submit{background:var(--navy);color:var(--white);border:none;padding:.9rem 1.5rem;font-family:'Inter',sans-serif;font-weight:600;font-size:.88rem;letter-spacing:.5px;cursor:pointer;transition:all .25s;width:100%;border-radius:2px;display:flex;align-items:center;justify-content:center;gap:.5rem}
+.btn-submit:hover{background:var(--gold)}
+
+/* FOOTER */
+footer{background:var(--navy);padding:2rem 5%;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem}
+.footer-logo{font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:700;color:var(--white)}
+.footer-logo span{color:var(--gold2)}
+.footer-copy{color:rgba(255,255,255,.45);font-size:.76rem}
+.footer-social{display:flex;gap:.6rem}
+.footer-social a{width:34px;height:34px;border:1px solid rgba(255,255,255,.2);border-radius:50%;display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.6);font-size:.8rem;text-decoration:none;transition:all .2s}
+.footer-social a:hover{border-color:var(--gold2);color:var(--gold2)}
+
+/* FLOAT BTNS */
+.float-cta{position:fixed;right:1.2rem;bottom:1.5rem;z-index:999;display:flex;flex-direction:column;gap:.6rem}
+.fb{width:48px;height:48px;border-radius:50%;display:flex;align-items:center;justify-content:center;text-decoration:none;transition:all .3s;box-shadow:0 3px 12px rgba(0,0,0,.25);font-size:1.1rem}
+.fb:hover{transform:scale(1.1)}
+.fb-zalo{background:#0068FF;color:#fff}
+.fb-phone{background:var(--gold);color:#fff}
+
+/* RESPONSIVE */
+@media(max-width:1024px){
+  .about-grid{grid-template-columns:1fr 1fr}
+  .exp-grid{grid-template-columns:1fr 1fr}
+  .about-img-wrap{max-width:100%}
+}
+@media(max-width:900px){
+  .about-grid,.contact-grid,.svc-header{grid-template-columns:1fr}
+  .listings-grid{grid-template-columns:1fr 1fr}
+  .hero-stats-bar{position:relative;bottom:auto;display:grid;grid-template-columns:repeat(3,1fr)}
+  .process-wrap::before{display:none}
+  .process-wrap{grid-template-columns:1fr 1fr;gap:2rem}
+  .nav-links,.nav-cta{display:none}
+  .nav-toggle{display:flex}
+  footer{flex-direction:column;text-align:center}
+}
+@media(max-width:600px){
+  .exp-grid,.svc-grid{grid-template-columns:1fr}
+  .listings-grid{grid-template-columns:1fr}
+  .about-highlights,.fg-row{grid-template-columns:1fr}
+  .hero-btns{flex-direction:column;align-items:flex-start}
+  .hero-btns .btn-gold,.hero-btns .btn-outline-white{width:100%;justify-content:center;padding:.7rem 1rem}
+  .hero-stats-bar{grid-template-columns:repeat(3,1fr)}
+  .stat-block{padding:.7rem .4rem}
+  .stat-num{font-size:1.3rem}
+  .stat-label{font-size:.56rem;letter-spacing:.4px}
+  section{padding:3rem 5%}
+  .hero-content{padding:2.5rem 5% 1.2rem}
+  .hero-subtitle{white-space:normal;font-size:clamp(.95rem,4.5vw,1.3rem)}
+  .hero-title .name{font-size:clamp(2rem,9vw,3.2rem)}
+  .hero-badge{font-size:.65rem;padding:.25rem .75rem;margin-bottom:.8rem}
+  .hero-tagline{font-size:.88rem}
+  .hero-desc{font-size:.82rem;line-height:1.75}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a href="#hero" class="nav-logo">VŨ TRỌNG KHẢI<span>.</span></a>
+  <ul class="nav-links">
+    <li><a href="#about">Về Tôi</a></li>
+    <li><a href="#expertise">Chuyên Môn</a></li>
+    <li><a href="#services">Dịch Vụ</a></li>
+    <li><a href="#projects">Dự Án</a></li>
+    <li><a href="#contact">Liên Hệ</a></li>
+  </ul>
+  <a href="#contact" class="nav-cta">Tư Vấn Ngay</a>
+  <div class="nav-toggle" id="navToggle"><span></span><span></span><span></span></div>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <button class="mobile-close" id="mobileClose"><i class="fas fa-times"></i></button>
+  <a href="#about" onclick="closeMobile()">Về Tôi</a>
+  <a href="#expertise" onclick="closeMobile()">Chuyên Môn</a>
+  <a href="#services" onclick="closeMobile()">Dịch Vụ</a>
+  <a href="#projects" onclick="closeMobile()">Dự Án</a>
+  <a href="#contact" onclick="closeMobile()">Liên Hệ</a>
+</div>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg">
+    <img src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=1920&q=85" alt="BĐS Cao Cấp TP.HCM" loading="eager">
+  </div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-badge fade-up"><i class="fas fa-gem"></i> &nbsp;Cố Vấn BĐS Cao Cấp</div>
+    <h1 class="hero-title fade-up">
+      <span class="hero-subtitle">Người Đồng Hành BĐS Đáng Tin Cậy</span>
+      <span class="name">Vũ Trọng Khải</span>
+    </h1>
+    <p class="hero-tagline fade-up">"Không chỉ bán bất động sản — tôi kiến tạo quyết định đúng đắn."</p>
+    <p class="hero-desc fade-up">Chuyên gia tư vấn BĐS cao cấp &amp; hạng sang tại TP.HCM, Nha Trang &amp; Vũng Tàu. Từ biệt thự hạng sang đến căn hộ cao cấp — tôi đồng hành từ bước đầu đến khi ký hợp đồng.</p>
+    <div class="hero-btns fade-up">
+      <a href="#contact" class="btn-gold"><i class="fas fa-comments"></i> Tư Vấn Miễn Phí</a>
+      <a href="#projects" class="btn-outline-white"><i class="fas fa-building"></i> Xem Dự Án</a>
+    </div>
+  </div>
+  <div class="hero-stats-bar">
+    <div class="stat-block"><span class="stat-num">5+</span><span class="stat-label">Năm kinh nghiệm</span></div>
+    <div class="stat-block"><span class="stat-num">$2M+</span><span class="stat-label">Doanh thu dự án</span></div>
+    <div class="stat-block"><span class="stat-num">150%</span><span class="stat-label">KPI Vinhomes</span></div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-grid">
+    <div class="about-img-wrap fade-up">
+      <div class="about-img-inner">
+        <img src="khai-photo.png" alt="Vũ Trọng Khải – A.tem" style="object-fit:cover;object-position:top">
+        <div class="about-tag-box">
+          <span class="about-role">CMO · Sale &amp; Marketing</span>
+          <div class="about-name-img">Vũ Trọng Khải – A.tem</div>
+        </div>
+      </div>
+      <div class="about-accent-box"></div>
+    </div>
+    <div class="about-info fade-up">
+      <span class="section-badge">Đôi nét về tôi</span>
+      <h2 class="section-title">Định Vị Thương Hiệu <span>Cá Nhân</span></h2>
+      <span class="gold-line"></span>
+      <p class="about-desc">Xin chào, tôi là <strong>Vũ Trọng Khải</strong> – CMO chuyên sâu về Sale &amp; Marketing Bất Động Sản Cao cấp. Xuất phát từ nền tảng kỹ sư xây dựng, qua nhiều năm hoạt động trong lĩnh vực Digital Marketing BĐS, tôi hiểu sản phẩm từ bên trong ra ngoài — từ chất lượng công trình đến tâm lý khách hàng.</p>
+      <p class="about-desc">Tôi không chỉ kết nối người mua và người bán — tôi là <em style="color:var(--gold);font-style:normal;font-weight:600">người đồng hành chiến lược</em>, giúp khách hàng ra quyết định sáng suốt dựa trên dữ liệu và am hiểu thị trường sâu sắc.</p>
+      <div class="about-highlights">
+        <div class="hi-item">
+          <i class="fas fa-chart-line"></i>
+          <h4>Tư Vấn Đầu Tư</h4>
+          <p>Phân tích ROI, tiềm năng tăng giá &amp; dòng tiền thực tế</p>
+        </div>
+        <div class="hi-item">
+          <i class="fas fa-home"></i>
+          <h4>An Cư Lý Tưởng</h4>
+          <p>Vị trí, tiện ích, pháp lý phù hợp từng gia đình</p>
+        </div>
+        <div class="hi-item">
+          <i class="fas fa-shield-alt"></i>
+          <h4>Pháp Lý Minh Bạch</h4>
+          <p>Kiểm định pháp lý, bảo vệ quyền lợi khách hàng</p>
+        </div>
+        <div class="hi-item">
+          <i class="fas fa-handshake"></i>
+          <h4>Đồng Hành Lâu Dài</h4>
+          <p>Chăm sóc hậu mãi &amp; hỗ trợ tái đầu tư</p>
+        </div>
+      </div>
+      <p style="font-size:.72rem;color:var(--gray);letter-spacing:1.5px;text-transform:uppercase;margin-top:1.2rem;margin-bottom:.5rem">Thị trường hoạt động</p>
+      <div class="market-chips">
+        <span class="chip">Thủ Thiêm · Q.2</span>
+        <span class="chip">An Phú · Thảo Điền</span>
+        <span class="chip">TP. Thủ Đức · Q.9</span>
+        <span class="chip">Nha Trang</span>
+        <span class="chip">Vũng Tàu</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CREDIBILITY STRIP -->
+<div id="cred">
+  <div class="cred-inner">
+    <div class="cred-item"><span class="cred-num">5+</span><span class="cred-text">Năm Kinh Nghiệm</span></div>
+    <div class="cred-div"></div>
+    <div class="cred-item"><span class="cred-num">$2M+</span><span class="cred-text">Doanh Thu Dự Án</span></div>
+    <div class="cred-div"></div>
+    <div class="cred-item"><span class="cred-num">150%</span><span class="cred-text">KPI Vinhomes</span></div>
+    <div class="cred-div"></div>
+    <div class="cred-item"><span class="cred-num">9+</span><span class="cred-text">Chủ Đầu Tư Hợp Tác</span></div>
+  </div>
+</div>
+
+<!-- EXPERTISE -->
+<section id="expertise">
+  <div class="text-center fade-up">
+    <span class="section-badge">Phân Khúc Sản Phẩm</span>
+    <h2 class="section-title">Chuyên Môn &amp; <span>Thị Trường</span></h2>
+    <span class="gold-line"></span>
+  </div>
+  <div class="exp-grid">
+    <div class="exp-card fade-up">
+      <div class="exp-icon"><i class="fas fa-city"></i></div>
+      <h3>Căn Hộ Cao Cấp</h3>
+      <p>Vinhomes Grand Park, The Global City, Eaton Park, OpusK, Metropole Thủ Thiêm, Grand Marina, Empire City, Lumiere Riverside, The Beverly...</p>
+      <div class="exp-tags"><span class="exp-tag">Thủ Thiêm</span><span class="exp-tag">Quận 2</span><span class="exp-tag">Thủ Đức</span></div>
+    </div>
+    <div class="exp-card fade-up">
+      <div class="exp-icon"><i class="fas fa-home"></i></div>
+      <h3>Biệt Thự &amp; Nhà Phố</h3>
+      <p>Gladia By The Water, Senturia An Phú, SpringVille, Celadon City — biệt thự liền kề &amp; nhà phố thương mại cao cấp trong các khu đô thị đẳng cấp.</p>
+      <div class="exp-tags"><span class="exp-tag">An Phú</span><span class="exp-tag">Thảo Điền</span><span class="exp-tag">Tân Bình</span></div>
+    </div>
+    <div class="exp-card fade-up">
+      <div class="exp-icon"><i class="fas fa-umbrella-beach"></i></div>
+      <h3>BĐS Nghỉ Dưỡng</h3>
+      <p>Libera Nha Trang, Blanca City, MAIA Hồ Tràm, Vinhomes Cần Giờ, Eco Retreat — vừa nghỉ dưỡng vừa sinh lời bền vững.</p>
+      <div class="exp-tags"><span class="exp-tag">Nha Trang</span><span class="exp-tag">Hồ Tràm</span><span class="exp-tag">Cần Giờ</span></div>
+    </div>
+    <div class="exp-card fade-up">
+      <div class="exp-icon"><i class="fas fa-exchange-alt"></i></div>
+      <h3>BĐS Thứ Cấp</h3>
+      <p>Hỗ trợ ra hàng cho nhà đầu tư — định giá thực, kết nối người mua uy tín, pháp lý sạch, giao dịch minh bạch từ A–Z.</p>
+      <div class="exp-tags"><span class="exp-tag">Ra Hàng Nhanh</span><span class="exp-tag">Pháp Lý Sạch</span><span class="exp-tag">ROI Cao</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="svc-header fade-up">
+    <div>
+      <span class="section-badge" style="color:var(--gold2)">Tôi Có Thể Giúp Gì</span>
+      <h2 class="section-title">Dịch Vụ <span>Cung Cấp</span></h2>
+      <span class="gold-line"></span>
+    </div>
+    <div style="font-size:.9rem;color:rgba(255,255,255,.65);line-height:1.9;font-weight:300">
+      <p style="margin-bottom:.8rem">Tôi đã từng gặp những khách hàng đứng trước một quyết định trị giá hàng tỷ đồng — và không biết bắt đầu từ đâu. Họ không thiếu tiền, họ thiếu <em style="color:var(--gold2)">người đồng hành đúng đắn</em>.</p>
+      <p>Đó là lý do tôi ở đây. Không phải để "chốt deal" — mà để giúp bạn hiểu rõ mình đang mua gì, tại sao, và liệu đó có phải quyết định phù hợp nhất không. Từ nhà đầu tư tìm kiếm dòng tiền bền vững đến gia đình muốn nơi an cư lý tưởng — tôi đồng hành với từng nhu cầu cụ thể.</p>
+    </div>
+  </div>
+  <div class="svc-grid">
+    <div class="svc-card fade-up">
+      <div class="svc-num">01</div>
+      <div class="svc-icon"><i class="fas fa-chart-bar"></i></div>
+      <h3>Tư Vấn Đầu Tư BĐS</h3>
+      <p>Phân tích ROI, uy tín Chủ đầu tư, pháp lý dự án và các chính sách ưu đãi giúp nhà đầu tư ra quyết định sinh lời tối ưu.</p>
+    </div>
+    <div class="svc-card fade-up">
+      <div class="svc-num">02</div>
+      <div class="svc-icon"><i class="fas fa-couch"></i></div>
+      <h3>Tư Vấn An Cư</h3>
+      <p>Lắng nghe nhu cầu sống thực tế — tư vấn vị trí, tiện ích, pháp lý phù hợp nhất với từng gia đình.</p>
+    </div>
+    <div class="svc-card fade-up">
+      <div class="svc-num">03</div>
+      <div class="svc-icon"><i class="fas fa-key"></i></div>
+      <h3>Sale BĐS Thứ Cấp</h3>
+      <p>Mua bán, chuyển nhượng BĐS cao cấp. Tư vấn định giá, thương lượng và hỗ trợ pháp lý giao dịch từ A–Z.</p>
+    </div>
+    <div class="svc-card fade-up">
+      <div class="svc-num">04</div>
+      <div class="svc-icon"><i class="fas fa-bullhorn"></i></div>
+      <h3>Marketing Thương Hiệu</h3>
+      <p>Xây dựng hình ảnh chuyên gia BĐS uy tín — content chiến lược, tăng nhận diện và thu hút lead chất lượng.</p>
+    </div>
+    <div class="svc-card fade-up">
+      <div class="svc-num">05</div>
+      <div class="svc-icon"><i class="fas fa-rocket"></i></div>
+      <h3>Marketing Performance Đa Nền Tảng</h3>
+      <p>Triển khai chiến dịch Performance bài bản trên Google, Facebook, TikTok, Zalo — tối ưu chuyển đổi, đo lường ROI thực tế theo từng nền tảng.</p>
+    </div>
+    <div class="svc-card fade-up">
+      <div class="svc-num">06</div>
+      <div class="svc-icon"><i class="fas fa-users"></i></div>
+      <h3>Chăm Sóc Khách Hàng</h3>
+      <p>Hệ thống chăm sóc hậu mãi — nuôi dưỡng quan hệ lâu dài, tạo nguồn giới thiệu và tái đầu tư tự nhiên.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section id="process">
+  <div class="text-center fade-up">
+    <span class="section-badge">Cách Tôi Làm Việc</span>
+    <h2 class="section-title">Quy Trình <span>4 Bước</span></h2>
+    <span class="gold-line"></span>
+    <p class="section-desc" style="max-width:500px;margin:0 auto 3rem">Từ lần đầu tiếp cận đến khi ký hợp đồng — mỗi bước đều được cá nhân hoá theo nhu cầu của bạn.</p>
+  </div>
+  <div class="process-wrap">
+    <div class="proc-step fade-up">
+      <div class="proc-num">01</div>
+      <h3>Lắng Nghe &amp; Thấu Hiểu</h3>
+      <p>Hiểu rõ nhu cầu, ngân sách, mục tiêu đầu tư hoặc an cư</p>
+    </div>
+    <div class="proc-step fade-up">
+      <div class="proc-num">02</div>
+      <h3>Phân Tích &amp; Đề Xuất</h3>
+      <p>Tuyển chọn sản phẩm phù hợp, phân tích chi tiết từng phương án</p>
+    </div>
+    <div class="proc-step fade-up">
+      <div class="proc-num">03</div>
+      <h3>Tư Vấn Chuyên Sâu</h3>
+      <p>Giải đáp thắc mắc, xử lý objection, hỗ trợ quyết định tự tin</p>
+    </div>
+    <div class="proc-step fade-up">
+      <div class="proc-num">04</div>
+      <h3>Đồng Hành Close Deal</h3>
+      <p>Hỗ trợ pháp lý, tài chính và chăm sóc sau giao dịch</p>
+    </div>
+  </div>
+</section>
+
+<!-- PARTNERS -->
+<section id="projects">
+  <div class="partners-intro fade-up">
+    <span class="section-badge">Hệ Sinh Thái Hợp Tác</span>
+    <h2 class="section-title">Chủ Đầu Tư <span>Đã Hợp Tác</span></h2>
+    <span class="gold-line"></span>
+    <p class="section-desc">Những thương hiệu BĐS hàng đầu tôi đã và đang đồng hành — là minh chứng cho sự tin tưởng mà thị trường dành cho tôi.</p>
+  </div>
+  <div class="logo-slider-wrap fade-up">
+    <div class="logo-track" id="logoTrack">
+      <div class="logo-item"><span>Vinhomes</span></div>
+      <div class="logo-item"><span>Masterise Homes</span></div>
+      <div class="logo-item"><span>Gamuda Land</span></div>
+      <div class="logo-item"><span>Khang Điền</span></div>
+      <div class="logo-item"><span>Sơn Kim Land</span></div>
+      <div class="logo-item"><span>Sun Group</span></div>
+      <div class="logo-item"><span>Ecopark</span></div>
+      <div class="logo-item"><span>Keppel Land</span></div>
+      <div class="logo-item"><span>CapitaLand</span></div>
+      <!-- duplicate for seamless loop -->
+      <div class="logo-item"><span>Vinhomes</span></div>
+      <div class="logo-item"><span>Masterise Homes</span></div>
+      <div class="logo-item"><span>Gamuda Land</span></div>
+      <div class="logo-item"><span>Khang Điền</span></div>
+      <div class="logo-item"><span>Sơn Kim Land</span></div>
+      <div class="logo-item"><span>Sun Group</span></div>
+      <div class="logo-item"><span>Ecopark</span></div>
+      <div class="logo-item"><span>Keppel Land</span></div>
+      <div class="logo-item"><span>CapitaLand</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURED LISTINGS -->
+<section id="listings">
+  <div class="fade-up">
+    <span class="section-badge">Danh Mục Sản Phẩm</span>
+    <h2 class="section-title">Dự Án Nổi Bật <span>Đang Triển Khai</span></h2>
+    <span class="gold-line"></span>
+    <p class="section-desc">Các dự án tôi đang trực tiếp phân phối — được chọn lọc kỹ về pháp lý, chủ đầu tư uy tín và tiềm năng sinh lời.</p>
+  </div>
+  <div class="listings-grid" id="listingsGrid">
+    <!-- Rendered by CMS JS -->
+    <div class="listing-card fade-up">
+      <span class="listing-badge">Căn Hộ Cao Cấp</span>
+      <div class="listing-img"><div class="listing-img-placeholder"><i class="fas fa-city"></i></div></div>
+      <div class="listing-body">
+        <div class="listing-name">Eaton Park</div>
+        <div class="listing-loc"><i class="fas fa-map-marker-alt"></i> Thủ Đức – TP.HCM</div>
+        <div class="listing-meta">
+          <div class="listing-meta-item"><span>Quy mô</span>1.200 căn</div>
+          <div class="listing-meta-item"><span>Loại hình</span>Căn hộ hạng sang</div>
+        </div>
+        <div class="listing-price"><div><span class="price-label">Giá từ</span><span class="price-num">8 – 15 tỷ</span></div><i class="fas fa-gem" style="color:var(--gold);opacity:.5"></i></div>
+      </div>
+      <a href="#contact" class="listing-cta">Tư Vấn Ngay →</a>
+    </div>
+    <div class="listing-card fade-up">
+      <span class="listing-badge">Biệt Thự</span>
+      <div class="listing-img"><div class="listing-img-placeholder"><i class="fas fa-home"></i></div></div>
+      <div class="listing-body">
+        <div class="listing-name">Gladia By The Water</div>
+        <div class="listing-loc"><i class="fas fa-map-marker-alt"></i> An Phú – Quận 2</div>
+        <div class="listing-meta">
+          <div class="listing-meta-item"><span>Quy mô</span>120 biệt thự</div>
+          <div class="listing-meta-item"><span>Loại hình</span>Biệt thự song lập</div>
+        </div>
+        <div class="listing-price"><div><span class="price-label">Giá từ</span><span class="price-num">35 – 80 tỷ</span></div><i class="fas fa-gem" style="color:var(--gold);opacity:.5"></i></div>
+      </div>
+      <a href="#contact" class="listing-cta">Tư Vấn Ngay →</a>
+    </div>
+    <div class="listing-card fade-up">
+      <span class="listing-badge">Nghỉ Dưỡng</span>
+      <div class="listing-img"><div class="listing-img-placeholder"><i class="fas fa-umbrella-beach"></i></div></div>
+      <div class="listing-body">
+        <div class="listing-name">Libera Nha Trang</div>
+        <div class="listing-loc"><i class="fas fa-map-marker-alt"></i> Nha Trang – Khánh Hoà</div>
+        <div class="listing-meta">
+          <div class="listing-meta-item"><span>Quy mô</span>500 căn condotel</div>
+          <div class="listing-meta-item"><span>Loại hình</span>Condotel ven biển</div>
+        </div>
+        <div class="listing-price"><div><span class="price-label">Giá từ</span><span class="price-num">2.5 – 5 tỷ</span></div><i class="fas fa-gem" style="color:var(--gold);opacity:.5"></i></div>
+      </div>
+      <a href="#contact" class="listing-cta">Tư Vấn Ngay →</a>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-grid">
+    <div class="fade-up">
+      <span class="section-badge">Bắt Đầu Ngay</span>
+      <h2 class="section-title">Liên Hệ <span>Tư Vấn</span></h2>
+      <span class="gold-line"></span>
+      <p class="section-desc" style="margin-bottom:1.8rem">Dù bạn đang tìm kiếm BĐS để đầu tư hay an cư — hãy để tôi đồng hành. Tư vấn miễn phí, không ràng buộc.</p>
+      <div class="contact-card">
+        <div class="icon"><i class="fas fa-phone"></i></div>
+        <div><div class="label">Điện thoại / Zalo</div><a href="tel:0902798800">0902 79 8800</a></div>
+      </div>
+      <div class="contact-card">
+        <div class="icon"><i class="fas fa-envelope"></i></div>
+        <div><div class="label">Email</div><a href="mailto:khaivt.ksxd.166@gmail.com">khaivt.ksxd.166@gmail.com</a></div>
+      </div>
+      <div class="contact-card">
+        <div class="icon"><i class="fab fa-facebook"></i></div>
+        <div><div class="label">Facebook</div><a href="https://www.facebook.com/khai.rainmaker" target="_blank">fb.com/khai.rainmaker</a></div>
+      </div>
+      <div class="contact-card">
+        <div class="icon"><i class="fas fa-map-marker-alt"></i></div>
+        <div><div class="label">Khu vực hoạt động</div><span class="val">TP.HCM · Nha Trang · Vũng Tàu</span></div>
+      </div>
+    </div>
+    <div class="contact-form-wrap fade-up">
+      <h3>Gửi Yêu Cầu Tư Vấn</h3>
+      <div class="contact-form">
+        <div class="fg-row">
+          <div class="fg"><label>Họ và Tên</label><input type="text" id="name" placeholder="Nguyễn Văn A"></div>
+          <div class="fg"><label>Số Điện Thoại</label><input type="tel" id="phone" placeholder="09x xxx xxxx"></div>
+        </div>
+        <div class="fg">
+          <label>Loại BĐS Quan Tâm</label>
+          <select id="interest" onchange="showSubType()">
+            <option value="">Chọn loại BĐS...</option>
+            <option value="can-ho">Căn hộ cao cấp</option>
+            <option value="biet-thu">Biệt thự</option>
+            <option value="nha-pho">Nhà phố liền kề</option>
+            <option value="nghi-duong-nt">BĐS nghỉ dưỡng – Nha Trang</option>
+            <option value="nghi-duong-vt">BĐS nghỉ dưỡng – Vũng Tàu</option>
+            <option value="thu-cap">BĐS thứ cấp (mua lại)</option>
+            <option value="khac">Tư vấn đầu tư (khác)</option>
+          </select>
+        </div>
+        <div class="fg" id="canhoTypeWrap" style="display:none">
+          <label>Loại Hình Căn Hộ</label>
+          <select id="canhoType">
+            <option value="">Chọn loại căn hộ...</option>
+            <option>Studio</option>
+            <option>1 phòng ngủ</option>
+            <option>2 phòng ngủ</option>
+            <option>3 phòng ngủ</option>
+            <option>Duplex</option>
+            <option>Penthouse</option>
+          </select>
+        </div>
+        <div class="fg">
+          <label>Vị Trí / Khu Vực Mong Muốn</label>
+          <select id="location">
+            <option value="">Chọn khu vực...</option>
+            <option>Thủ Thiêm – Quận 2</option>
+            <option>An Phú – Thảo Điền</option>
+            <option>TP. Thủ Đức – Quận 9</option>
+            <option>Trung tâm – Quận 1, 3, 4</option>
+            <option>Nha Trang – Khánh Hoà</option>
+            <option>Vũng Tàu – BRVT</option>
+            <option>Linh hoạt (tư vấn thêm)</option>
+          </select>
+        </div>
+        <div class="fg">
+          <label>Ngân Sách Dự Kiến</label>
+          <select id="budget">
+            <option value="">Chọn ngân sách...</option>
+            <option>Dưới 3 tỷ</option>
+            <option>3 – 7 tỷ</option>
+            <option>7 – 15 tỷ</option>
+            <option>15 – 30 tỷ</option>
+            <option>Trên 30 tỷ</option>
+          </select>
+        </div>
+        <div class="fg"><label>Ghi Chú (Tuỳ Chọn)</label><textarea id="message" placeholder="Mô tả thêm nhu cầu của bạn..."></textarea></div>
+        <button class="btn-submit" onclick="handleSubmit()"><i class="fas fa-paper-plane"></i> Gửi Yêu Cầu Tư Vấn</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">VŨ TRỌNG KHẢI<span>.</span></div>
+  <div class="footer-copy">© 2026 · Cố Vấn BĐS Cao Cấp · TP. Hồ Chí Minh</div>
+  <div class="footer-social">
+    <a href="https://www.facebook.com/khai.rainmaker" target="_blank"><i class="fab fa-facebook-f"></i></a>
+    <a href="https://zalo.me/0902798800" target="_blank"><i class="fas fa-comment-dots"></i></a>
+    <a href="mailto:khaivt.ksxd.166@gmail.com"><i class="fas fa-envelope"></i></a>
+  </div>
+</footer>
+
+<!-- FLOAT -->
+<div class="float-cta">
+  <a href="https://zalo.me/0902798800" target="_blank" class="fb fb-zalo" title="Chat Zalo">
+    <svg width="20" height="20" viewBox="0 0 64 64" fill="white"><path d="M32 4C16.536 4 4 15.72 4 30c0 8.2 4.28 15.48 10.96 20.2L12 60l10.44-4.24C25.36 57.24 28.64 58 32 58c15.464 0 28-11.72 28-26S47.464 4 32 4z"/></svg>
+  </a>
+  <a href="tel:0902798800" class="fb fb-phone" title="Gọi ngay">
+    <i class="fas fa-phone"></i>
+  </a>
+</div>
+
+<script>
+// Navbar
+const nav=document.getElementById('navbar');
+window.addEventListener('scroll',()=>nav.classList.toggle('scrolled',scrollY>60));
+
+// Mobile menu
+document.getElementById('navToggle').onclick=()=>document.getElementById('mobileMenu').classList.add('open');
+document.getElementById('mobileClose').onclick=()=>document.getElementById('mobileMenu').classList.remove('open');
+function closeMobile(){document.getElementById('mobileMenu').classList.remove('open')}
+
+// Fade-up
+const io=new IntersectionObserver((entries)=>{
+  entries.forEach((e,i)=>{
+    if(e.isIntersecting) setTimeout(()=>e.target.classList.add('visible'),i*80);
+  });
+},{threshold:.1});
+document.querySelectorAll('.fade-up').forEach(el=>io.observe(el));
+
+// Form sub-type
+function showSubType(){
+  const v=document.getElementById('interest').value;
+  document.getElementById('canhoTypeWrap').style.display=v==='can-ho'?'flex':'none';
+}
+
+// ─── CMS Config (loaded from content.json) ───
+let _cmsConfig={};
+
+// ─── Form submit with webhook ───
+async function handleSubmit(){
+  const n=document.getElementById('name').value.trim();
+  const p=document.getElementById('phone').value.trim();
+  if(!n||!p){alert('Vui lòng nhập họ tên và số điện thoại!');return;}
+  const data={
+    name:n, phone:p,
+    interest:document.getElementById('interest').value,
+    canhoType:(document.getElementById('canhoType')||{}).value||'',
+    location:document.getElementById('location').value,
+    budget:document.getElementById('budget').value,
+    message:document.getElementById('message').value
+  };
+  const fm=(_cmsConfig.form_settings)||{};
+  let sent=false;
+  // Send to Formspree/email webhook
+  if(fm.email_webhook){
+    try{
+      await fetch(fm.email_webhook,{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify(data)});
+      sent=true;
+    }catch(e){}
+  }
+  // Send to Google Sheet
+  if(fm.google_sheet_url){
+    try{fetch(fm.google_sheet_url,{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)});sent=true;}catch(e){}
+  }
+  alert('Cảm ơn '+n+'! Anh Khải sẽ liên hệ với bạn sớm nhất qua số '+p+'. Hẹn gặp bạn sớm! 🏠');
+  // Reset form
+  ['name','phone','interest','location','budget','message'].forEach(id=>{const el=document.getElementById(id);if(el)el.value='';});
+  if(document.getElementById('canhoTypeWrap'))document.getElementById('canhoTypeWrap').style.display='none';
+}
+
+// ─── CMS: Load from content.json ───
+(async function loadCMS(){
+  try{
+    const r=await fetch('/content.json?t='+Date.now());
+    if(!r.ok) return;
+    const c=await r.json();
+    _cmsConfig=c;
+
+    // Helpers
+    const setText=(sel,val,html=false)=>{const e=document.querySelector(sel);if(e&&val!==undefined){if(html)e.innerHTML=val;else e.textContent=val;}};
+    const setMeta=(name,val,prop=false)=>{if(!val)return;let m=document.querySelector(prop?`meta[property="${name}"]`:`meta[name="${name}"]`);if(!m){m=document.createElement('meta');m.setAttribute(prop?'property':'name',name);document.head.appendChild(m);}m.setAttribute('content',val);};
+
+    // SEO + OG + Favicon
+    if(c.seo){
+      if(c.seo.title)document.title=c.seo.title;
+      setMeta('description',c.seo.description);
+      setMeta('keywords',c.seo.keywords);
+      setMeta('og:title',c.seo.title,true);
+      setMeta('og:description',c.seo.description,true);
+      if(c.seo.og_image){setMeta('og:image',c.seo.og_image,true);}
+      if(c.seo.favicon){
+        let fl=document.querySelector('link[rel="icon"]');
+        if(!fl){fl=document.createElement('link');fl.rel='icon';document.head.appendChild(fl);}
+        fl.href=c.seo.favicon;
+      }
+    }
+
+    // Hero
+    if(c.hero){
+      setText('.hero-badge','💎  '+c.hero.badge);
+      const t=document.querySelector('.hero-title');
+      if(t&&c.hero.title_line1)t.innerHTML='<span class="hero-subtitle">'+c.hero.title_line1+' '+c.hero.title_line2+'</span><span class="name">'+c.hero.name+'</span>';
+      setText('.hero-tagline',c.hero.tagline);
+      setText('.hero-desc',c.hero.description);
+      const stats=document.querySelectorAll('.stat-block');
+      [{n:c.hero.stat1_num,l:c.hero.stat1_label},{n:c.hero.stat2_num,l:c.hero.stat2_label},{n:c.hero.stat3_num,l:c.hero.stat3_label}]
+        .forEach((s,i)=>{if(stats[i]){stats[i].querySelector('.stat-num').textContent=s.n;stats[i].querySelector('.stat-label').textContent=s.l;}});
+      const bg=(c.hero.bg_image||'').trim();
+      if(bg){const img=document.querySelector('.hero-bg img');if(img)img.src=bg;}
+    }
+
+    // About
+    if(c.about){
+      const img=document.querySelector('.about-img-inner img');
+      if(img&&c.about.photo)img.src=c.about.photo;
+      setText('.about-role',c.about.role_badge);
+      setText('.about-name-img',c.about.name_caption);
+      const descs=document.querySelectorAll('.about-desc');
+      if(descs[0]&&c.about.desc1)descs[0].innerHTML=c.about.desc1;
+      if(descs[1]&&c.about.desc2)descs[1].innerHTML=c.about.desc2;
+    }
+
+    // Cred strip
+    if(c.cred){
+      const ci=document.querySelectorAll('.cred-item');
+      [{n:c.cred.num1,l:c.cred.label1},{n:c.cred.num2,l:c.cred.label2},{n:c.cred.num3,l:c.cred.label3},{n:c.cred.num4,l:c.cred.label4}]
+        .forEach((d,i)=>{if(ci[i]){ci[i].querySelector('.cred-num').textContent=d.n;ci[i].querySelector('.cred-text').textContent=d.l;}});
+    }
+
+    // Expertise
+    if(c.expertise){
+      const cards=document.querySelectorAll('.exp-card');
+      [{t:c.expertise.card1_title,d:c.expertise.card1_desc},{t:c.expertise.card2_title,d:c.expertise.card2_desc},
+       {t:c.expertise.card3_title,d:c.expertise.card3_desc},{t:c.expertise.card4_title,d:c.expertise.card4_desc}]
+        .forEach((ed,i)=>{if(cards[i]){const h=cards[i].querySelector('h3');const p=cards[i].querySelector('p');if(h)h.textContent=ed.t;if(p)p.textContent=ed.d;}});
+    }
+
+    // Featured Listings
+    if(c.listings&&c.listings.length){
+      const grid=document.getElementById('listingsGrid');
+      if(grid){
+        const iconMap={'Căn Hộ Cao Cấp':'fa-city','Biệt Thự':'fa-home','Nhà Phố':'fa-store','Nghỉ Dưỡng':'fa-umbrella-beach','Thứ Cấp':'fa-exchange-alt'};
+        grid.innerHTML=c.listings.map(p=>{
+          const icon=iconMap[p.badge]||'fa-building';
+          const imgHtml=p.image?`<img src="${p.image}" alt="${p.name}" style="width:100%;height:100%;object-fit:cover">`:`<div class="listing-img-placeholder"><i class="fas ${icon}"></i></div>`;
+          return `<div class="listing-card fade-up">
+            <span class="listing-badge">${p.badge||''}</span>
+            <div class="listing-img">${imgHtml}</div>
+            <div class="listing-body">
+              <div class="listing-name">${p.name}</div>
+              <div class="listing-loc"><i class="fas fa-map-marker-alt"></i> ${p.location}</div>
+              <div class="listing-meta">
+                <div class="listing-meta-item"><span>Quy mô</span>${p.scale}</div>
+                <div class="listing-meta-item"><span>Loại hình</span>${p.type}</div>
+              </div>
+              <div class="listing-price"><div><span class="price-label">Giá từ</span><span class="price-num">${p.price}</span></div><i class="fas fa-gem" style="color:var(--gold);opacity:.5"></i></div>
+            </div>
+            <a href="#contact" class="listing-cta">Tư Vấn Ngay →</a>
+          </div>`;
+        }).join('');
+        // Re-observe new cards for fade-up
+        document.querySelectorAll('#listingsGrid .fade-up').forEach(el=>io.observe(el));
+      }
+    }
+
+    // Partners slider
+    if(c.partners&&c.partners.length){
+      const track=document.getElementById('logoTrack');
+      if(track){const dbl=[...c.partners,...c.partners];track.innerHTML=dbl.map(p=>`<div class="logo-item"><span>${p}</span></div>`).join('');}
+    }
+
+    // Contact
+    if(c.contact){
+      const ct=c.contact;
+      document.querySelectorAll('.contact-card').forEach(card=>{
+        const lbl=card.querySelector('.label');if(!lbl)return;
+        const l=lbl.textContent.trim();
+        if(l.includes('Điện')){const a=card.querySelector('a');if(a){a.href=ct.phone_link;a.textContent=ct.phone;}}
+        if(l.includes('Email')){const a=card.querySelector('a');if(a){a.href='mailto:'+ct.email;a.textContent=ct.email;}}
+        if(l.includes('Facebook')){const a=card.querySelector('a');if(a){a.href=ct.facebook_url;a.textContent=ct.facebook_label;}}
+      });
+      const zs=document.querySelector('.fb-zalo');if(zs)zs.href=ct.zalo_link;
+      const ph=document.querySelector('.fb-phone');if(ph)ph.href='tel:'+ct.zalo_phone;
+      const fl=document.querySelectorAll('.footer-social a');
+      if(fl[0])fl[0].href=ct.facebook_url;
+      if(fl[1])fl[1].href=ct.zalo_link;
+      if(fl[2])fl[2].href='mailto:'+ct.email;
+    }
+
+  }catch(e){console.log('CMS load skipped:',e.message);}
+})();
+</script>
+</body>
+</html>
