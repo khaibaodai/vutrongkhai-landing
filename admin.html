@@ -961,6 +961,24 @@ function toast(msg,type=''){
 
 // ── Init ──
 (function init(){
+  // Auto-setup from URL hash (e.g. /admin#gh_token=TOKEN)
+  if(location.hash && location.hash.includes('gh_token=')){
+    const params=new URLSearchParams(location.hash.slice(1));
+    const t=params.get('gh_token');
+    const r=params.get('gh_repo')||'khaibaodai/vutrongkhai-landing';
+    const b=params.get('gh_branch')||'master';
+    if(t){ localStorage.setItem('gh_token',t); }
+    if(r){ localStorage.setItem('gh_repo',r); }
+    if(b){ localStorage.setItem('gh_branch',b); }
+    // Clear hash from URL (security - token not visible in browser history)
+    history.replaceState(null,'',location.pathname);
+    // Show success after page loads
+    setTimeout(()=>{
+      updateGHStatus();
+      toast('✅ Đã kết nối GitHub tự động! Sẵn sàng Publish.','green');
+      show('hero');
+    },600);
+  }
   // Pre-fill GitHub settings from localStorage
   const ti=document.getElementById('gh_token_input');
   const ri=document.getElementById('gh_repo_input');
